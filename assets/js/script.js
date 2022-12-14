@@ -91,69 +91,6 @@ var infolatlon = function (coordinates) {
 
 }
 
-// var get = function () {
-//     method: 'GET'
-// }
 
-// var city = function () {
-
-
-//     fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + city + ',' + state + ',' + 'US&limit=1&appid=' + apiKey, get)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//         })
-// }
-
-// city();
-
-// var city = function () {
-
-
-//     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city},${state},US&limit=1&appid=${apiKey}`)
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data);
-//         })
-// }
-
-// city();
-// var longandlat = function () {
-
-//     fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + latitude + & lon={ lon } & appid={ API key }') 
-//         .then(response => response.json())
-//         .then(data => {
-//             console.log(data)
-//         })
-
-
-// }
-
-
-// var run1 = function () {
-//     const option = {
-//         method: 'GET',
-
-//     }
-// };
-
-// var namesListel = document.getElementById("namesList")
-
-
-// fetch("https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey, run1)
-
-//     .then((response) => response.json())
-//     .then((data) => {
-//         //console.log("Successful POST request:", data);
-//         console.log(data.city.name)
-//         var cityName = data.city.name;
-//         var cityNameLiEl = document.createElement("<li>")
-//         cityNameLiEl.textContent = cityName.value
-
-//         return data;
-
-//     })
-//     .catch(error => console.log('error', error));
-//         // console.error("Error in POST request:", error);
 
 
