@@ -47,9 +47,11 @@
     <div class="row">
         <div class="col-12 col-md-4 col-lg-3 p-3">
             <h3>Search</h3>
-            <input class="search-bar shadow-lg my-2"></input>
+            <input id="search-bar" type="search" placeholder="Search Your Location" class="search-bar shadow-lg my-2"
+                aria-label="Search" aria-describedby="search-addon"></input>
+            <button id="search-bar-btn" type="button" class="btn btn-outline-primary">Search</button>
             <div class="card shadow-lg" style="width: 18rem;">
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush" id="namesList">
                     <li class="list-group-item">Atlanta</li>
                     <li class="list-group-item">Denver</li>
                     <li class="list-group-item">Seattle</li>
@@ -62,11 +64,11 @@
         </div>
         <div class="col-12 col-md-8 col-lg-9">
             <div class="row">
-                <h3>Location</h3>
+                <h3 id="main-location">Location</h3>
                 <ul>
-                    <li>Temperature: </li>
-                    <li>Wind: </li>
-                    <li>Humidity: </li>
+                    <li id="main-temperature">Temperature: </li>
+                    <li id="main-wind">Wind: </li>
+                    <li id="main-humidity">Humidity: </li>
                 </ul>
             </div>
 
@@ -79,11 +81,13 @@
                         <h5 class="card-title">Card Secondary Title</h5>
                         <p class="card-text">Quick Text</p>
                     </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Temp: </li>
-                        <li class="list-group-item">Wind: </li>
-                        <li class="list-group-item">Humid: </li>
-                    </ul>
+                    <table class="card table table-striped">
+                        <tr class="list-group list-group-flush" id="tablerow">
+                            <td class="list-group-item" id="tabledata">Temp: </td>
+                            <td class="list-group-item" id="tabledata">Wind: </td>
+                            <td class="list-group-item" id="tabledata">Humid: </td>
+                        </tr>
+                    </table>
                     <div class="card-body">
                         <a href="#" class="card-link">Link 1</a>
                         <a href="#" class="card-link">Link 2</a>

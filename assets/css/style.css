@@ -1,0 +1,7 @@
+#tablerow {
+    display: table;
+}
+
+#tabledata {
+    display: inherit;
+}
