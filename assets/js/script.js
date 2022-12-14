@@ -96,6 +96,7 @@ var infolatlonNow = function (coordinates, state) {
             var cityStateCountry = document.querySelector('#location')
             cityStateCountry.textContent = cityName + ', ' + state + ', ' + country;
 
+            //* Temperature: data.main.temp (K)
             console.log(data.main.temp)
             //* temp now in Kelvin
             var tempKelvin = data.main.temp;
@@ -119,6 +120,16 @@ var infolatlonNow = function (coordinates, state) {
             console.log(data.weather[0].description);
             // descriptionNow = data.weather[0].description.value;
             descriptionLi.textContent = 'Description: ' + data.weather[0].description;
+
+            //* Wind Speed: data.wind
+            var windLi = document.querySelector("#main-wind");
+            windLi.textContent = 'Wind Speed: ' + data.wind.speed + 'mph';
+
+            //* Humidity: data.main.humidity (%)
+            var humidityLi = document.querySelector("#main-humidity");
+            humidityLi.textContent = 'Humidity: ' + data.main.humidity + '%';
+
+
 
 
 
