@@ -69,7 +69,7 @@ var latlon = function () {
             //*coordinate[i]
 
 
-            //infolatlonFuture(coordinates, state);
+            infolatlonFuture(coordinates, state, country);
             infolatlonNow(coordinates, state, country);
             return coordinates, state, country
         })
@@ -84,12 +84,7 @@ var infolatlonNow = function (coordinates, state) {
             console.log(coordinates)
             console.log(data);
             console.log(data.main)
-            //console.log(data.city.country)
             console.log(state)
-
-
-            //country = data.city.country;
-
 
             console.log(data.name)
             cityName = data.name;
@@ -129,11 +124,6 @@ var infolatlonNow = function (coordinates, state) {
             var humidityLi = document.querySelector("#main-humidity");
             humidityLi.textContent = 'Humidity: ' + data.main.humidity + '%';
 
-
-
-
-
-
             // console.log(data.list)
             // console.log(data.list[0].dt_txt)
             // var datetime = data.list[0].dt_txt;
@@ -146,6 +136,8 @@ var infolatlonNow = function (coordinates, state) {
 
 }
 
+//* 5-day Weather Forecast cards:
+
 var infolatlonFuture = function (coordinates, state) {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=981e313affd3213b334e9460a4970735`)
         .then(response => response.json())
@@ -155,28 +147,48 @@ var infolatlonFuture = function (coordinates, state) {
             console.log(data.city)
             console.log(data.city.country)
             console.log(state)
-            country = data.city.country;
-
+            //country = data.city.country;
             console.log(data.city.name)
-            cityName = data.city.name;
+            //cityName = data.city.name;
             //var cityStateCountry = document.querySelector('#location')
-            cityStateCountry.textContent = cityName + country;
+            //cityStateCountry.textContent = cityName + country;
+
+
+
 
             console.log(data.list)
             console.log(data.list[0].dt_txt)
             var datetime = data.list[0].dt_txt;
             console.log(dayjs(datetime).format('MMM D, YYYY h:mm A'));
             //* date and time weather forecasted for
-            futureDayTime = dayjs(datetime).format('MMM D, YYYY h:mm A');
-            console.log(futureDayTime)
+            oneDayTime = dayjs(datetime).format('MMM D, YYYY');
 
 
-            console.log(data.list[0].main.temp)
+            //* grab pEl 'future-day' in first card under 5-day Weather Forecase
+            var futureDayTimeEl = document.querySelector("#future-day");
+            futureDayTimeEl.textContent = oneDayTime;
+
+            //* grab quick text by id 'card-text' and enter description
+            var cardpEl = document.querySelector(".card-text");
+            cardpEl.textContent = data.list[1].weather[0].description;
+
+
+            console.log(data.list[1].main.temp)
             //* temp in Kelvin
-            var tempKevlin = data.list[0].main.temp;
+            var tempKevlin = data.list[1].main.temp;
             //* temp in Farenheit
             var tempFarenheit = (tempKevlin - 273.15) * (9 / 5) + 32;
             console.log(tempFarenheit);
+
+            //* grab table data in 1st card for tabledata- 'temp', 'wind', 'humid'
+            var oneDayTemp = document.querySelector(".temp");
+            oneDayTemp.textContent = Math.floor(tempFarenheit) + '℉';
+
+            var oneDayWind = document.querySelector(".wind");
+            oneDayWind.textContent = data.list[1].wind.speed + 'mph';
+
+            var oneDayHumid = document.querySelector(".humid");
+            oneDayHumid.textContent = data.list[1].main.humidity + '%';
 
 
 
@@ -187,9 +199,6 @@ var infolatlonFuture = function (coordinates, state) {
 
 
 
-// var location = document.getElementById("main-location");
-// var temperature = document.getElementById("main-wind");
-// var humidity = document.getElementById("main-humidity");
 
 // var infolatlon = function (coordinates) {
 //     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=e7a88aed42c57808fa6dc34c1ede065e`)

@@ -76,22 +76,28 @@
             <div class="row">
                 <h3>5-day Weather Forecast</h3>
                 <div class="card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2">
-                    <p>Weather</p>
+                    <p id="future-day">Future Day</p>
                     <img class="card-img-top" src="..." alt="Card Image Cap">
                     <div class="card-body">
                         <h5 class="card-title">Card Secondary Title</h5>
                         <p class="card-text">Quick Text</p>
                     </div>
                     <table class="card table table-striped">
-                        <tr class="list-group list-group-flush" id="tablerow">
-                            <td class="list-group-item" id="tabledata">Temp: </td>
-                            <td class="list-group-item" id="tabledata">Wind: </td>
-                            <td class="list-group-item" id="tabledata">Humid: </td>
+                        <tr id="tablerow">
+                            <th>Temp: </th>
+                            <td class="temp" id="tabledata">X</td>
+                        </tr>
+                        <tr id="tablerow">
+                            <th>Wind: </th>
+                            <td class="wind" id="tabledata">X</td>
+                        </tr>
+                        <tr id="tablerow">
+                            <th>Humid: </th>
+                            <td class="humid" id="tabledata">X</td>
                         </tr>
                     </table>
                     <div class="card-body">
                         <a href="#" class="card-link">Link 1</a>
-                        <a href="#" class="card-link">Link 2</a>
                     </div>
                 </div>
                 <div class="card col-12 col-md-3 col-lg-2 p-3 mx-2">

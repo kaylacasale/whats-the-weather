@@ -1,7 +1,18 @@
-#tablerow {
+/* #tablerow {
     display: table;
+    justify-content: space-between;
+} */
+
+/* #tabledata {
+    float: inline-end;
+} */
+
+#tablerow {
+    width: fit-content;
 }
 
-#tabledata {
-    display: inherit;
+#search-bar {
+    height: 40px;
+    border-radius: 5px;
+    border-color: rgb(64, 109, 177);
 }
