@@ -34,6 +34,9 @@ var country;
 var lat;
 var lon;
 
+
+init()
+
 //* add event listener to searchBtn
 //* set 'city' variable equal to input value from searchbar
 //* set 'state' variable equal to input value from searchbar
@@ -67,16 +70,62 @@ var latlon = function () {
             var coordinates = [lat, lon]
             console.log(coordinates)
             //*coordinate[i]
+            var stateCountry = state + ', ' + country;
+            //* local storage
+            saveLastSearch(coordinates);
+            saveArr(stateCountry)
+
+            //localStorage.setItem("stateCountry", JSON.stringify(stateCountry))
+            localStorage.setItem("lastSearch", "stateCountry");
 
 
+
+
+            //renderLastSearch(stateCountry);
             infolatlonFuture(coordinates, state, country);
             infolatlonNow(coordinates, state, country);
             return coordinates, state, country
         })
 
-
+}
+function saveArr(stateCountry) {
+    var searchArr = []
+    searchArr.push(stateCountry);
+    localStorage.setItem('stateCountryArr', JSON.stringify(searchArr))
+}
+function saveLastSearch(lat, lon) {
+    var coordinates = [lat, lon];
+    localStorage.setItem("coordinates", JSON.stringify(coordinates));
+    //renderLastSearch(coordinates);
 }
 
+var dropdownLiEl = document.querySelector(".li")
+var allListItems = document.querySelectorAll("list-group-item")
+
+//* render 1st search
+function renderLast() {
+    for (var i = 0; i <= localStorage.length - 1; i++) {
+        var storedSearch = JSON.parse(localStorage.getItem("stateCountryArr"))
+        document.querySelector(".list-group-item").innerHTML = storedSearch;
+
+    }
+    // var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
+    // console.log(lastSearch)
+    // document.querySelector(".list-group-item").innerHTML = lastSearch;
+}
+
+function renderLast2() {
+    var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
+    console.log(lastSearch)
+    document.querySelector(".list-group-item2").innerHTML = lastSearch;
+}
+
+
+function init() {
+
+    renderLast();
+    renderLast2();
+}
 var infolatlonNow = function (coordinates, state) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=981e313affd3213b334e9460a4970735`)
         .then(response => response.json())
@@ -153,16 +202,40 @@ var infolatlonFuture = function (coordinates, state) {
             //var cityStateCountry = document.querySelector('#location')
             //cityStateCountry.textContent = cityName + country;
 
-
-
+            //var cardsDiv = document.getElementById("cards");
 
             console.log(data.list)
             console.log(data.list[0].dt_txt)
             var datetime = data.list[0].dt_txt;
             console.log(dayjs(datetime).format('MMM D, YYYY h:mm A'));
             //* date and time weather forecasted for
-            oneDayTime = dayjs(datetime).format('MMM D, YYYY');
+            var oneDayTime = dayjs(datetime).format('dddd, MMM D');
+            day = dayjs(datetime).format('dddd');
+            dayNum = dayjs(datetimeSee).format('D')
+            console.log(dayNum)
+            time = dayjs(datetime).format('h:mm A')
+            //*time = 12:00am
+            console.log(time)
 
+            // var datetime1 = data.list[1].dt_text;
+            // console.log(datetime1)
+
+
+            for (var i = 0; i < data.list.length; i++) {
+                var datetimeSee = data.list[i].dt_txt;
+                console.log(datetimeSee)
+                dayandtime = dayjs(datetimeSee).format('MMM D h:mm A');
+                console.log(dayandtime)
+                dayNumber = dayjs(datetimeSee).format('D');
+                console.log(dayNumber)
+
+
+            }
+
+            console.log(dayNumber)
+
+            // var cardHeader = document.querySelector(".cards")
+            // cardHeader.textContent = day
 
             //* grab pEl 'future-day' in first card under 5-day Weather Forecase
             var futureDayTimeEl = document.querySelector("#future-day");
@@ -191,14 +264,120 @@ var infolatlonFuture = function (coordinates, state) {
             oneDayHumid.textContent = data.list[1].main.humidity + '%';
 
 
+            nextDayCard(data);
+
+
+            var dx = data.list[1].weather[0].description;
+            generateIcon(dx)
+
+
+
+
+
+            //* grab icon <i> and generate icon based off description (inludes)
+            // var iClass = document.querySelector(".material-icons");
+            // // //iClass.setAttribute("class", "material-icons")
+
+            // // //* added Google Icon link
+            // // //* add text content as deacription for preset google icons with class 'material-icons'
+
+            // if (data.list[1].weather[0].description.includes("clear")) {
+            //     iClass.textContent = "brightness_5"
+            // }
+
+            // if (data.list[1].weather[0].description.includes("clouds", "cloudy")) {
+            //     iClass.textContent = "cloud"
+            // }
+
+            // }
+
+
+
+
+
+
 
         })
 }
 
+//* display dropdown upon click event on searchbar
+//* add li items from local storage
+//* hide dropdown El until click event
+var dropDownMenuEl = document.querySelector(".dropdown-menu")
+dropDownMenuEl.style.display = "none"
+
+searchBarEl.addEventListener("click", function () {
+    dropDownMenuEl.style.display = "block";
+})
 
 
+function nextDayCard(data) {
+    var nextDay = dayjs(data.list[6].dt_txt).format('dddd, MMM D');
+    console.log(nextDay)
+    var futureDay2El = document.getElementById("future-day2")
+    futureDay2El.textContent = nextDay
+
+    //* grab quick text by id 'card-text' and enter description
+    var cardpEl = document.querySelector(".card-text2");
+    cardpEl.textContent = data.list[1].weather[0].description;
 
 
+    console.log(data.list[6].main.temp)
+    //* temp in Kelvin
+    var tempKevlin = data.list[6].main.temp;
+    //* temp in Farenheit
+    var tempFarenheit = (tempKevlin - 273.15) * (9 / 5) + 32;
+    console.log(tempFarenheit);
+
+    //* grab table data in 1st card for tabledata- 'temp', 'wind', 'humid'
+    var oneDayTemp = document.querySelector(".temp2");
+    oneDayTemp.textContent = Math.floor(tempFarenheit) + '℉';
+
+    var oneDayWind = document.querySelector(".wind2");
+    oneDayWind.textContent = data.list[6].wind.speed + 'mph';
+
+    var oneDayHumid = document.querySelector(".humid3");
+    oneDayHumid.textContent = data.list[6].main.humidity + '%';
+
+    //* pass dx into generate icon to decide which icon to display based on description in given array
+    var dx = data.list[6].weather[0].description
+    generateIcon2(dx);
+
+}
+
+//* for first card
+function generateIcon(description) {
+    var iClass = document.querySelector(".material-icons");
+    // //iClass.setAttribute("class", "material-icons")
+
+    // //* added Google Icon link
+    // //* add text content as deacription for preset google icons with class 'material-icons'
+
+    if (description.includes("clear")) {
+        iClass.textContent = "brightness_5"
+    }
+
+    if (description.includes("clouds", "cloudy")) {
+        iClass.textContent = "cloud"
+    }
+}
+
+//* for 2nd card
+function generateIcon2(description) {
+    var iClass = document.querySelector("#icon2");
+    // //iClass.setAttribute("class", "material-icons")
+
+    // //* added Google Icon link
+    // //* add text content as deacription for preset google icons with class 'material-icons'
+
+    if (description.includes("clear")) {
+        iClass.textContent = "brightness_5"
+    }
+
+    if (description.includes("clouds", "cloudy")) {
+        iClass.textContent = "cloud"
+    }
+}
 
 // var infolatlon = function (coordinates) {
 //     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=e7a88aed42c57808fa6dc34c1ede065e`)
@@ -216,6 +395,7 @@ var infolatlonFuture = function (coordinates, state) {
 //         })
 
 // }
+
 
 
 

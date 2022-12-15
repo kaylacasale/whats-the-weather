@@ -8,7 +8,7 @@
 } */
 
 #tablerow {
-    width: fit-content;
+    width: inherit;
 }
 
 #search-bar {
