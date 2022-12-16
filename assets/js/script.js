@@ -37,6 +37,10 @@ var lon;
 
 init()
 
+// input = {
+//     state: 
+// }
+
 //* add event listener to searchBtn
 //* set 'city' variable equal to input value from searchbar
 //* set 'state' variable equal to input value from searchbar
@@ -70,7 +74,7 @@ var latlon = function () {
             var coordinates = [lat, lon]
             console.log(coordinates)
             //*coordinate[i]
-            var stateCountry = state + ', ' + country;
+            var stateCountry = city + ',' + state + ', ' + country;
             //* local storage
             saveLastSearch(coordinates);
             saveArr(stateCountry)
@@ -84,29 +88,49 @@ var latlon = function () {
             //renderLastSearch(stateCountry);
             infolatlonFuture(coordinates, state, country);
             infolatlonNow(coordinates, state, country);
-            return coordinates, state, country
+            return coordinates, state, country, stateCountry
         })
 
 }
+
+//* how do i keep adding values to stateCountry without deleting prior and append new list items with this value
+var searchArr = {
+    stateCountry: []
+}
 function saveArr(stateCountry) {
-    var searchArr = []
-    searchArr.push(stateCountry);
+    // var searchArr = {}
+    searchArr.stateCountry.unshift(stateCountry);
+    console.log(searchArr)
     localStorage.setItem('stateCountryArr', JSON.stringify(searchArr))
 }
 function saveLastSearch(lat, lon) {
     var coordinates = [lat, lon];
     localStorage.setItem("coordinates", JSON.stringify(coordinates));
+    //rerunCoordinates(coordinates)
     //renderLastSearch(coordinates);
 }
 
 var dropdownLiEl = document.querySelector(".li")
 var allListItems = document.querySelectorAll("list-group-item")
 
+
+// function rerunCoordinates() {
+//     var storedCoordinates = JSON.parse(localStorage.getItem("coordinates"))
+//     console.log(storedCoordinates[0][0])
+//     init(storedCoordinates[0][0])
+// }
 //* render 1st search
 function renderLast() {
-    for (var i = 0; i <= localStorage.length - 1; i++) {
-        var storedSearch = JSON.parse(localStorage.getItem("stateCountryArr"))
-        document.querySelector(".list-group-item").innerHTML = storedSearch;
+    for (var i = 0; i < localStorage.length; i++) {
+        //var storedSearch = JSON.parse(localStorage.getItem("searchArr"[i]))
+        console.log(JSON.parse(localStorage.getItem("stateCountryArr")))
+        var stored = JSON.parse(localStorage.getItem("stateCountryArr"))
+        console.log(stored.stateCountry)
+        storedValue = stored.stateCountry
+
+        // console.log(localStorage.stateCountryArr[i])
+
+        document.querySelector(".list-group-item").innerHTML = storedValue;
 
     }
     // var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
@@ -119,12 +143,13 @@ function renderLast2() {
     console.log(lastSearch)
     document.querySelector(".list-group-item2").innerHTML = lastSearch;
 }
-
-
-function init() {
-
+//* what day out of future arraya has most
+//coordinates = storedCoordinates[0][0]
+function init(coordinates) {
+    // coordinates = storedCoordinates[0][0]
     renderLast();
     renderLast2();
+
 }
 var infolatlonNow = function (coordinates, state) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=981e313affd3213b334e9460a4970735`)
@@ -291,12 +316,6 @@ var infolatlonFuture = function (coordinates, state) {
 
             // }
 
-
-
-
-
-
-
         })
 }
 
@@ -310,16 +329,17 @@ searchBarEl.addEventListener("click", function () {
     dropDownMenuEl.style.display = "block";
 })
 
+//* if day number increased, log the increased date day in the next card
 
 function nextDayCard(data) {
-    var nextDay = dayjs(data.list[6].dt_txt).format('dddd, MMM D');
+    var nextDay = dayjs(data.list[8].dt_txt).format('dddd, MMM D');
     console.log(nextDay)
     var futureDay2El = document.getElementById("future-day2")
     futureDay2El.textContent = nextDay
 
     //* grab quick text by id 'card-text' and enter description
     var cardpEl = document.querySelector(".card-text2");
-    cardpEl.textContent = data.list[1].weather[0].description;
+    cardpEl.textContent = data.list[6].weather[0].description;
 
 
     console.log(data.list[6].main.temp)
