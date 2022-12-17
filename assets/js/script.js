@@ -40,18 +40,31 @@ init()
 // input = {
 //     state: 
 // }
-
+var searchArr = {}
 //* add event listener to searchBtn
 //* set 'city' variable equal to input value from searchbar
 //* set 'state' variable equal to input value from searchbar
-searchBtnEl.addEventListener('click', function () {
+var run = searchBtnEl.addEventListener('click', function () {
     console.log(searchBarEl.value);
-
     city = searchBarEl.value;
+
+
+    //saveArr(city);
+    // for (var i = 0; i < 10; i++) {
+    //     searchArr = {
+    //         "i": city
+    //     }
+    //     //searchArr.push("hello")
+    //     console.log(searchArr)
+    // }
+
+    // city = searchBarEl.value;
     //state = searchBarEl.value;
     latlon();
 })
 
+
+let stateCountry = []
 //* function to find 'lat' and 'lon' (global) and store in var 'coordinates' (local)
 //* pass coordinates from geo identifier api into next promise to get 'lat' and 'lon' from searchbar input
 var latlon = function () {
@@ -61,6 +74,7 @@ var latlon = function () {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            saveData(data)
             lat = (data[0].lat)
             lon = (data[0].lon)
             console.log(lat, lon)
@@ -77,7 +91,8 @@ var latlon = function () {
             var stateCountry = city + ',' + state + ', ' + country;
             //* local storage
             saveLastSearch(coordinates);
-            saveArr(stateCountry)
+            //saveArr(stateCountry)
+
 
             //localStorage.setItem("stateCountry", JSON.stringify(stateCountry))
             localStorage.setItem("lastSearch", "stateCountry");
@@ -93,16 +108,127 @@ var latlon = function () {
 
 }
 
+
+
+
+
+// for (var i = 0; i < 10; i++) {
+//     var b = {
+//         i: ['value']
+//     }
+//     console.log(b)
+// }
 //* how do i keep adding values to stateCountry without deleting prior and append new list items with this value
-var searchArr = {
-    stateCountry: []
+// var searchArr = {
+//     stateCountry: []
+// }
+
+// var newArr = {}
+// for (var i = 0; i < 10; i++) {
+//     var newArr = searchArr.push('[state]')
+// }
+
+renderingObject = {
+
 }
-function saveArr(stateCountry) {
-    // var searchArr = {}
-    searchArr.stateCountry.unshift(stateCountry);
-    console.log(searchArr)
-    localStorage.setItem('stateCountryArr', JSON.stringify(searchArr))
+
+var saveData = function (data) {
+    var saveHere = []
+    for (var i = 0; i < saveHere.length + 1; i++) {
+        console.log(data[0])
+        saveHere.push(data[0])[i]
+        i++
+
+        console.log(saveHere)
+
+
+
+
+        localStorage.setItem('dataArray', JSON.stringify(saveHere))
+        console.log(saveHere)
+
+    }
+
+    console.log(saveHere)
+    render(saveHere)
+
 }
+
+var render = function renderer(dataArray) {
+    for (var i = 0; i < dataArray.length + 1; i++) {
+        console.log(JSON.parse(localStorage.getItem(dataArray)))
+        var store = JSON.parse(localStorage.getItem(dataArray))
+
+
+    }
+
+    console.log(store)
+    // displayStored(store)
+    // return store
+}
+
+
+// arrayStore = {}
+// function displayStored(store) {
+//     for (var i = 0; i < arrayStore.length + 1; i++) {
+//         arrayStore[i] = store
+
+
+
+//     }
+//     console.log(arrayStore)
+// }
+
+
+
+// var b = ["hi"]
+
+// var arr = {
+
+// }
+
+// for (var i = 0; i < 10; i++) {
+//     arr[i] = "b"
+// }
+// console.log(arr)
+// var searchArr = {
+
+// }
+// // console.log(newArr)
+// function saveArr(stateCountry) {
+
+
+//     for (var i = 0; i < 10; i++) {
+//         if (searchArr[i++] = "") {
+//             searchArr[i++] = stateCountry
+//         } else {
+//             return searchArr
+//         }
+//         // searchArr = stateCountry[i]
+//         // searchArr = {
+//         //     stateCountry
+//         // }
+
+//         //searchArr.push("hello")
+//         //console.log(searchArr)
+//         // searchArr[i] = stateCountry
+//         //searchArr[i++] = stateCountry
+//     }
+
+//     //newArr.push(searchArr)
+//     console.log(searchArr)
+//     //var stateCountryArr = searchArr.push(stateCountry)
+
+//     //console.log(stateCountryArr)
+//     // var searchArr = {}
+//     //searchArr.stateCountry.push(stateCountry);
+//     console.log(searchArr)
+//     localStorage.setItem('stateCountryArr', JSON.stringify(searchArr))
+//     return searchArr
+
+
+
+
 function saveLastSearch(lat, lon) {
     var coordinates = [lat, lon];
     localStorage.setItem("coordinates", JSON.stringify(coordinates));
@@ -415,7 +541,6 @@ function generateIcon2(description) {
 //         })
 
 // }
-
 
 
 
