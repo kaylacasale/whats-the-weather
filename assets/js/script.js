@@ -103,15 +103,30 @@ var latlon = function () {
             //renderLastSearch(stateCountry);
             infolatlonFuture(coordinates, state, country);
             infolatlonNow(coordinates, state, country);
+            //makeCardEls(data)
             return coordinates, state, country, stateCountry
         })
 
 }
 
+// //* generate elements and assign to classes with data attributes
 
+// containerDiv = document.getElementById('newCards')
 
+// function makeCardEls(data) {
+//     for (i = 0; i < 40; i + 8) {
+//         var forecastCardsRowHeader = document.createElement('h3');
+//         rowCardAttribute = data[i].dt_txt
+//         forecastCardsRowHeader.setAttribute('class', 'cards');
+//         forecastCardsRowHeader.textContent = data[i].dt_txt;
 
+//         forecastCardsRow.setAttribute('data-hour', rowCardAttribute)
 
+//         forecastCardsRow.setAttribute('class', 'search-bar shadow-lg my-2')
+//         rowCardAttribute = data[i]
+
+//     }
+// }
 // for (var i = 0; i < 10; i++) {
 //     var b = {
 //         i: ['value']
@@ -342,8 +357,9 @@ var infolatlonFuture = function (coordinates, state) {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=981e313affd3213b334e9460a4970735`)
         .then(response => response.json())
         .then(data => {
+            //makeCardEls(data.list)
             console.log(coordinates)
-            console.log(data);
+            console.log(data);// {cod: '200', ....list: Array(40)}
             console.log(data.city)
             console.log(data.city.country)
             console.log(state)
@@ -355,7 +371,7 @@ var infolatlonFuture = function (coordinates, state) {
 
             //var cardsDiv = document.getElementById("cards");
 
-            console.log(data.list)
+            console.log(data.list)//(40)[{..}, ]
             console.log(data.list[0].dt_txt)
             var datetime = data.list[0].dt_txt;
             console.log(dayjs(datetime).format('MMM D, YYYY h:mm A'));
@@ -367,12 +383,36 @@ var infolatlonFuture = function (coordinates, state) {
             time = dayjs(datetime).format('h:mm A')
             //*time = 12:00am
             console.log(time)
+            var datelist = data.list
+            //makeCardEls(data)
+
 
             // var datetime1 = data.list[1].dt_text;
             // console.log(datetime1)
 
 
-            for (var i = 0; i < data.list.length; i++) {
+            for (var i = 0; i < datelist.length; i++) {
+                var
+                var delta = Math.floor(datelist.length /
+
+                for (var j = 0; j < datelist[i].length; j++) {
+                    var cardsDiv = document.createElement('div');
+                    cardAttr = dayjs().day(j).format('D')
+                    cardsDiv.setAttribute('data-day', 'cardAttr')
+                    forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+
+
+                    console.log(cardAttr)
+
+                }
+                cardAttr = dayjs().day(j).format('D')
+                console.log(cardAttr)
+                console.log()
+                console.log(datelist[i])
+                console.log(datelist[i].dt_txt)
+
+
+
                 var datetimeSee = data.list[i].dt_txt;
                 console.log(datetimeSee)
                 dayandtime = dayjs(datetimeSee).format('MMM D h:mm A');
@@ -380,8 +420,37 @@ var infolatlonFuture = function (coordinates, state) {
                 dayNumber = dayjs(datetimeSee).format('D');
                 console.log(dayNumber)
 
+                list = {
+                    "dateLong": datetimeSee,
+                    "dateFull": dayandtime,
+                    "day": dayNumber
+                }
+
+                //console.log(list.date)
+                console.log(list.dateFull)
+                console.log(dayNumber)
+                console.log(list)
+                makeCardEls(list)
+
+                // for (var j = 0; i < data.list.length; j++) {
+                //     var forecastCardsDiv = document.createElement('div')
+                //     rowCardAttr = list.dayNumber
+                //     console.log(data.list[i])
+                //     forecastCardsDiv.setAttribute('data-day', rowCardAttr)
+                //     forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+                //     containerDiv.appendChild(forecastCardsDiv)
+                // }
+                // //rowCardAttr = dayjs(data).day(i).format('D')
+                // var futuredate = dayjs(data.list[i].dt_txt).format('D'); //20, 21, 22
+                // console.log(futuredate)
+
+                // rowCardAttr = futuredate[i]
+                // forecastCardsDiv.setAttribute('data-day', rowCardAttr)
+                // forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+                // containerDiv.appendChild(forecastCardsDiv)
 
             }
+            console.log(list.dateFull)
 
             console.log(dayNumber)
 
@@ -445,6 +514,63 @@ var infolatlonFuture = function (coordinates, state) {
         })
 }
 
+//* generate elements and assign to classes with data attributes
+
+containerDiv = document.getElementById('newCards')
+//var day = data.list
+//console.log(data)
+
+function makeCardEls(list) {
+    for (i = 0; i < list.length; i++) {
+        var forecastCardsDiv = document.createElement('div')
+        console.log(list.datetimeSee)
+        //rowCardAttr = dayjs(data).day(i).format('D')
+        var futuredate = dayjs(data.list[i].dt_txt).format('D'); //20, 21, 22
+        console.log(futuredate)
+
+        rowCardAttr = futuredate[i]
+        forecastCardsDiv.setAttribute('data-day', rowCardAttr)
+        forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+        containerDiv.appendChild(forecastCardsDiv)
+        // console.log(i)
+        // console.log(data)
+        // console.log(data.list[i].dt_txt)
+        // console.log(data.list.length)
+        // var forecastCardsRowHeader = document.createElement('h3');
+        // console.log(data)
+        // rowCardAttr = dayjs(data).day(i).format('D')
+        // console.log(data)
+        // //var futureDate = dayjs().day(data.list[i].dt_txt).format('dddd, MMM D');
+        // //console.log(futureDate)
+        // rowCardAttribute = dayjs().day(data.list[i]).format('dddd, MMM D');
+        // console.log(rowCardAttribute = dayjs(data.list[i].dt_txt).format('dddd, MMM D'));
+
+        // forecastCardsRowHeader.setAttribute('data-hour', rowCardAttribute)
+
+        //console.log(data[i])
+
+        //forecastCardsRowHeader.setAttribute('class', 'cards');
+        //forecastCardsRowHeader.textContent = data[i].dt_txt;
+        // console.log(data.list[0])
+        // var futuredate = dayjs(data.list[i].dt_txt).format('dddd, MMM D');
+        // var forecastCardsDiv = document.createElement('div')
+        // rowCardAttr = dayjs(data).day(i).format('D')
+        // dayjs(data).day(i).format('D')
+        // // forecastCardsDiv.setAttribute('data-day', rowCardAttr)
+        // // console.log(rowCardAttr)
+
+
+        // //  rowCardAttribute = dayjs(data.list[i].dt_txt).format('dddd, MMM D');
+        // //forecastCardsDiv.setAttribute('data-day', rowCardAttribute)
+
+
+        // forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+        // //forecastCardsDiv.textContent = dayjs(data.list[i].dt_txt).format('dddd, MMM D')
+        // containerDiv.appendChild(forecastCardsDiv);
+
+
+    }
+}
 //* display dropdown upon click event on searchbar
 //* add li items from local storage
 //* hide dropdown El until click event
