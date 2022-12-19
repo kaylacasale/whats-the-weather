@@ -431,6 +431,7 @@ var infolatlonFuture = function (coordinates, state) {
                 console.log(description)
                 var temperatureKelvin = data.list[i].main.temp
                 var temperatureFarenheit = Math.floor((temperatureKelvin - 273.15) * (9 / 5) + 32)
+                var wind = Math.floor(data.list[i].wind.speed)
 
 
 
@@ -445,7 +446,8 @@ var infolatlonFuture = function (coordinates, state) {
                         "day": dayNumber,
                         "hour": dayHour,
                         "description": description,
-                        "temp": temperatureFarenheit
+                        "temp": temperatureFarenheit,
+                        "wind": wind
 
                     }
 
@@ -612,6 +614,20 @@ function makeCardEls(list) {
     tableDataTemp.setAttribute('id', 'tabledata')
     tableDataTemp.textContent = list.temp + "℉"
     tableRowTemp.append(tableDataTemp)
+
+    var tableRowWind = document.createElement('tr')
+    tableRowWind.setAttribute('id', 'tablerow')
+    table.append(tableRowWind)
+
+    var tableHeaderWind = document.createElement('th')
+    tableHeaderWind.textContent = "Wind: "
+    tableRowWind.append(tableHeaderWind)
+
+    var tableDataWind = document.createElement('td')
+    tableDataWind.setAttribute('class', 'wind')
+    tableDataWind.setAttribute('id', 'tabledata')
+    tableDataWind.textContent = list.wind + "mph"
+    tableRowWind.append(tableDataWind)
 
 
 
