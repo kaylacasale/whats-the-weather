@@ -588,7 +588,8 @@ function renderInfo() {
     // }
 
 }
-
+var displayArr = []
+console.log(displayArr)
 function displayInfo(lastInfo) {
     console.log(lastInfo)
     var searchDiv = document.getElementById('searchGroup')
@@ -596,12 +597,20 @@ function displayInfo(lastInfo) {
     var ulEl = document.createElement('ul')
     ulEl.setAttribute('class', 'list-group list-group-flush')
     searchDiv.append(ulEl)
+    var liEl = document.createElement('li')
+    liEl.setAttribute('class', 'list-group-item')
+    //  liEl.textContent = lastInfo[i][0]
+    ulEl.append(liEl)
 
 
     console.log(lastInfo[0].city)
 
     for (var i = 0; i < lastInfo.length + 1; i++) {
         console.log(lastInfo[i])
+        liEl.innerHTML = 'lastInfo[i]'
+
+
+
     }
 
     // for (var i = 0; i < 10; i++) {
