@@ -547,6 +547,11 @@ function makeCardEls(list) {
     forecastCardsDiv.setAttribute('data-day', 'cardAttr')
     containerDiv.appendChild(forecastCardsDiv)
 
+    var futureDayNineAm = document.createElement('p')
+    futureDayNineAm.setAttribute('class', 'future-day')
+    futureDayNineAm.textContent = list.day
+    forecastCardsDiv.appendChild(futureDayNineAm)
+
 
 
     //     console.log(list.day)
