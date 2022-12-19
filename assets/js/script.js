@@ -414,6 +414,8 @@ var infolatlonFuture = function (coordinates, state) {
             //*time = 12:00am
             console.log(time)
             var datelist = data.list
+            var searchBarDiv = document.getElementById('searchGroup')
+            searchBarDiv.textContent = ""
             //makeCardEls(data)
 
             info = {
@@ -425,6 +427,7 @@ var infolatlonFuture = function (coordinates, state) {
             console.log(info)
             searchesArr.push(info)
             saveInfo(info)
+
             // info.setAttribute('data-index', info.elements["i"])
             // console.log(info.elements)
 
@@ -600,6 +603,7 @@ function saveInfo(info) {
 
 
 function renderInfo() {
+    lastInfo = ""
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
 
@@ -637,6 +641,9 @@ function displayInfo(lastInfo) {
     console.log(lastInfo)
     console.log(lastInfo[0].city)
 
+
+
+
     for (var i = 0; i < lastInfo.length; i++) {
         console.log(lastInfo[i])
         // liEl.innerHTML = lastInfo[i]
@@ -667,6 +674,9 @@ function displayInfo(lastInfo) {
         liEl.setAttribute('class', 'list-group-item')
         liEl.textContent = searchListText
         ulEl.append(liEl)
+
+
+
 
     }
 
@@ -945,10 +955,12 @@ function makeCardEls(list) {
 //dropDownMenuEl.style.display = "none"
 
 searchBarEl.addEventListener("click", function () {
-    //dropDownMenuEl.style.display = "block";
-    onclick = "saveInfo([info1, info2, info3])"
+    searchBarEl.textContent = ""
 
-    saveInfo()
+    //dropDownMenuEl.style.display = "block";
+    // onclick = "saveInfo([info1, info2, info3])"
+
+    // saveInfo()
 })
 
 //* if day number increased, log the increased date day in the next card
@@ -1046,6 +1058,7 @@ function start() {
     console.log(pulled[0])
     city = pulled[0].city
     latlon(city)
+
 }
 
 start()
