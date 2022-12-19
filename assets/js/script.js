@@ -557,6 +557,7 @@ function makeCardEls(list) {
     //for (i = 0; i < list.length; i++) {
     forecastCardsDiv = document.createElement('div')
     forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+    forecastCardsDiv.style["boxShadow"] = "5px";
 
     cardAttr = list.day
     forecastCardsDiv.setAttribute('data-day', 'cardAttr')
