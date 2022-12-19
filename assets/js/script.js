@@ -290,6 +290,7 @@ function init(coordinates) {
     // coordinates = storedCoordinates[0][0]
     renderLast();
     renderLast2();
+
     renderInfo()
 
 }
@@ -461,7 +462,7 @@ var infolatlonFuture = function (coordinates, state) {
                         "description": description,
                         "temp": temperatureFarenheit,
                         "wind": wind,
-                        "humid": humid
+                        "humid": humid,
 
                     }
 
@@ -471,6 +472,8 @@ var infolatlonFuture = function (coordinates, state) {
                     console.log(dayNumber)
                     console.log(list)
                     makeCardEls(list)
+                    // listArr.push(list)
+                    //saveLastList(list)
                 }
                 // for (var j = 0; i < data.list.length; j++) {
                 //     var forecastCardsDiv = document.createElement('div')
@@ -498,37 +501,37 @@ var infolatlonFuture = function (coordinates, state) {
             // cardHeader.textContent = day
 
             //* grab pEl 'future-day' in first card under 5-day Weather Forecase
-            var futureDayTimeEl = document.querySelector("#future-day");
-            futureDayTimeEl.textContent = oneDayTime;
+            // var futureDayTimeEl = document.querySelector("#future-day");
+            // futureDayTimeEl.textContent = oneDayTime;
 
-            //* grab quick text by id 'card-text' and enter description
-            var cardpEl = document.querySelector(".card-text");
-            cardpEl.textContent = data.list[1].weather[0].description;
-
-
-            console.log(data.list[1].main.temp)
-            //* temp in Kelvin
-            var tempKevlin = data.list[1].main.temp;
-            //* temp in Farenheit
-            var tempFarenheit = (tempKevlin - 273.15) * (9 / 5) + 32;
-            console.log(tempFarenheit);
-
-            //* grab table data in 1st card for tabledata- 'temp', 'wind', 'humid'
-            var oneDayTemp = document.querySelector(".temp");
-            oneDayTemp.textContent = Math.floor(tempFarenheit) + '℉';
-
-            var oneDayWind = document.querySelector(".wind");
-            oneDayWind.textContent = data.list[1].wind.speed + 'mph';
-
-            var oneDayHumid = document.querySelector(".humid");
-            oneDayHumid.textContent = data.list[1].main.humidity + '%';
+            // //* grab quick text by id 'card-text' and enter description
+            // var cardpEl = document.querySelector(".card-text");
+            // cardpEl.textContent = data.list[1].weather[0].description;
 
 
-            nextDayCard(data);
+            // console.log(data.list[1].main.temp)
+            // //* temp in Kelvin
+            // var tempKevlin = data.list[1].main.temp;
+            // //* temp in Farenheit
+            // var tempFarenheit = (tempKevlin - 273.15) * (9 / 5) + 32;
+            // console.log(tempFarenheit);
+
+            // //* grab table data in 1st card for tabledata- 'temp', 'wind', 'humid'
+            // var oneDayTemp = document.querySelector(".temp");
+            // oneDayTemp.textContent = Math.floor(tempFarenheit) + '℉';
+
+            // var oneDayWind = document.querySelector(".wind");
+            // oneDayWind.textContent = data.list[1].wind.speed + 'mph';
+
+            // var oneDayHumid = document.querySelector(".humid");
+            // oneDayHumid.textContent = data.list[1].main.humidity + '%';
 
 
-            var dx = data.list[1].weather[0].description;
-            generateIcon(dx)
+            // nextDayCard(data);
+
+
+            // var dx = data.list[1].weather[0].description;
+            // generateIcon(dx)
 
 
 
@@ -566,6 +569,8 @@ function saveInfo(info) {
 }
 
 
+
+
 function renderInfo() {
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
@@ -590,13 +595,16 @@ function renderInfo() {
     // }
 
 }
+
+function passCoord(searchCoord) {
+    console.log(searchCoord)
+    //init(searchCoord)
+
+}
 var displayArr = []
 console.log(displayArr)
 function displayInfo(lastInfo) {
     console.log(lastInfo)
-
-
-
     console.log(lastInfo[0].city)
 
     for (var i = 0; i < lastInfo.length; i++) {
@@ -608,6 +616,12 @@ function displayInfo(lastInfo) {
             "state": infoArr.state,
             "country": infoArr.country
         }
+
+        var searchCoord = {
+            "coord": infoArr.coord
+        }
+        passCoord(searchCoord)
+
         console.log(searchHistory)
         var searchDiv = document.getElementById('searchGroup')
         var searchListText = searchHistory.city + ", " + searchHistory.state
@@ -620,10 +634,6 @@ function displayInfo(lastInfo) {
         liEl.setAttribute('class', 'list-group-item')
         liEl.textContent = searchListText
         ulEl.append(liEl)
-
-
-
-
 
     }
 
@@ -646,6 +656,16 @@ function displayInfo(lastInfo) {
 //     localStorage.setItem(key, value)
 // }
 
+// listArr = []
+// function saveLastList(list) {
+//     console.log(list)
+
+
+
+// }
+// function renderLastList() {
+//     var lastList = JSON.parse(localStorage.getItem(""))
+// }
 
 //* generate elements and assign to classes with data attributes
 
@@ -828,78 +848,79 @@ function makeCardEls(list) {
 searchBarEl.addEventListener("click", function () {
     //dropDownMenuEl.style.display = "block";
     onclick = "saveInfo([info1, info2, info3])"
+
     //saveInfo()
 })
 
 //* if day number increased, log the increased date day in the next card
 
-function nextDayCard(data) {
-    var nextDay = dayjs(data.list[8].dt_txt).format('dddd, MMM D');
-    console.log(nextDay)
-    var futureDay2El = document.getElementById("future-day2")
-    futureDay2El.textContent = nextDay
+// function nextDayCard(data) {
+//     var nextDay = dayjs(data.list[8].dt_txt).format('dddd, MMM D');
+//     console.log(nextDay)
+//     var futureDay2El = document.getElementById("future-day2")
+//     futureDay2El.textContent = nextDay
 
-    //* grab quick text by id 'card-text' and enter description
-    var cardpEl = document.querySelector(".card-text2");
-    cardpEl.textContent = data.list[6].weather[0].description;
+//     //* grab quick text by id 'card-text' and enter description
+//     var cardpEl = document.querySelector(".card-text2");
+//     cardpEl.textContent = data.list[6].weather[0].description;
 
 
-    console.log(data.list[6].main.temp)
-    //* temp in Kelvin
-    var tempKevlin = data.list[6].main.temp;
-    //* temp in Farenheit
-    var tempFarenheit = (tempKevlin - 273.15) * (9 / 5) + 32;
-    console.log(tempFarenheit);
+//     console.log(data.list[6].main.temp)
+//     //* temp in Kelvin
+//     var tempKevlin = data.list[6].main.temp;
+//     //* temp in Farenheit
+//     var tempFarenheit = (tempKevlin - 273.15) * (9 / 5) + 32;
+//     console.log(tempFarenheit);
 
-    //* grab table data in 1st card for tabledata- 'temp', 'wind', 'humid'
-    var oneDayTemp = document.querySelector(".temp2");
-    oneDayTemp.textContent = Math.floor(tempFarenheit) + '℉';
+//     //* grab table data in 1st card for tabledata- 'temp', 'wind', 'humid'
+//     var oneDayTemp = document.querySelector(".temp2");
+//     oneDayTemp.textContent = Math.floor(tempFarenheit) + '℉';
 
-    var oneDayWind = document.querySelector(".wind2");
-    oneDayWind.textContent = data.list[6].wind.speed + 'mph';
+//     var oneDayWind = document.querySelector(".wind2");
+//     oneDayWind.textContent = data.list[6].wind.speed + 'mph';
 
-    var oneDayHumid = document.querySelector(".humid3");
-    oneDayHumid.textContent = data.list[6].main.humidity + '%';
+//     var oneDayHumid = document.querySelector(".humid3");
+//     oneDayHumid.textContent = data.list[6].main.humidity + '%';
 
-    //* pass dx into generate icon to decide which icon to display based on description in given array
-    var dx = data.list[6].weather[0].description
-    generateIcon2(dx);
+//     //* pass dx into generate icon to decide which icon to display based on description in given array
+//     var dx = data.list[6].weather[0].description
+//     generateIcon2(dx);
 
-}
+// }
 
 //* for first card
-function generateIcon(description) {
-    var iClass = document.querySelector(".material-icons");
-    // //iClass.setAttribute("class", "material-icons")
+// function generateIcon(description) {
+//     var iClass = document.querySelector(".material-icons");
+//     // //iClass.setAttribute("class", "material-icons")
 
-    // //* added Google Icon link
-    // //* add text content as deacription for preset google icons with class 'material-icons'
+//     // //* added Google Icon link
+//     // //* add text content as deacription for preset google icons with class 'material-icons'
 
-    if (description.includes("clear")) {
-        iClass.textContent = "brightness_5"
-    }
+//     if (description.includes("clear")) {
+//         iClass.textContent = "brightness_5"
+//     }
 
-    if (description.includes("clouds", "cloudy")) {
-        iClass.textContent = "cloud"
-    }
-}
+//     if (description.includes("clouds", "cloudy")) {
+//         iClass.textContent = "cloud"
+//     }
+// }
 
-//* for 2nd card
-function generateIcon2(description) {
-    var iClass = document.querySelector("#icon2");
-    // //iClass.setAttribute("class", "material-icons")
+// //* for 2nd card
+// function generateIcon2(description) {
+//     var iClass = document.querySelector("#icon2");
+//     // //iClass.setAttribute("class", "material-icons")
 
-    // //* added Google Icon link
-    // //* add text content as deacription for preset google icons with class 'material-icons'
+//     // //* added Google Icon link
+//     // //* add text content as deacription for preset google icons with class 'material-icons'
 
-    if (description.includes("clear")) {
-        iClass.textContent = "brightness_5"
-    }
+//     if (description.includes("clear")) {
+//         iClass.textContent = "brightness_5"
+//     }
 
-    if (description.includes("clouds", "cloudy")) {
-        iClass.textContent = "cloud"
-    }
-}
+//     if (description.includes("clouds", "cloudy")) {
+//         iClass.textContent = "cloud"
+//     }
+// }
 
 // var infolatlon = function (coordinates) {
 //     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=e7a88aed42c57808fa6dc34c1ede065e`)
