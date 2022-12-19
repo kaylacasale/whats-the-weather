@@ -290,6 +290,7 @@ function init(coordinates) {
     // coordinates = storedCoordinates[0][0]
     renderLast();
     renderLast2();
+    renderInfo()
 
 }
 var infolatlonNow = function (coordinates, state) {
@@ -561,6 +562,14 @@ function saveInfo(info) {
     //     searches.push(info.elements[i])
     // }
     localStorage.setItem("search", JSON.stringify(searchesArr))
+}
+
+function renderInfo() {
+    var lastInfo = JSON.parse(localStorage.getItem("search"))
+    console.log(lastInfo)
+
+
+
 }
 // searchesArr.push(info)
 // localStorage.setItem("info", JSON.stringify(searchArr))
