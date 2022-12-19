@@ -429,6 +429,10 @@ var infolatlonFuture = function (coordinates, state) {
                 //console.log(cardNumber)
                 var description = data.list[i].weather[0].description;
                 console.log(description)
+                var temperatureKelvin = data.list[i].main.temp
+                var temperatureFarenheit = Math.floor((temperatureKelvin - 273.15) * (9 / 5) + 32)
+
+
 
 
 
@@ -440,7 +444,8 @@ var infolatlonFuture = function (coordinates, state) {
                         "dateFull": dayandtime,
                         "day": dayNumber,
                         "hour": dayHour,
-                        "description": description
+                        "description": description,
+                        "temp": temperatureFarenheit
 
                     }
 
@@ -579,7 +584,37 @@ function makeCardEls(list) {
     if (list.description.includes("clouds", "cloudy")) {
         cardIcon.textContent = "cloud"
     }
+
+    if (list.description.includes("rain", "rainy")) {
+        cardIcon.textContent = "opacity"
+    }
     futureCardBodyDiv.append(cardIcon)
+
+    var description = document.createElement('p')
+    description.setAttribute('class', 'card-text')
+    description.textContent = list.description
+    futureCardBodyDiv.append(description)
+
+    var table = document.createElement('table')
+    table.setAttribute('class', 'card table table-striped')
+    futureCardBodyDiv.append(table)
+
+    var tableRowTemp = document.createElement('tr')
+    tableRowTemp.setAttribute('id', 'tablerow')
+    table.append(tableRowTemp)
+
+    var tableHeaderTemp = document.createElement('th')
+    tableHeaderTemp.textContent = "Temp: "
+    tableRowTemp.append(tableHeaderTemp)
+
+    var tableDataTemp = document.createElement('td')
+    tableDataTemp.setAttribute('class', 'temp')
+    tableDataTemp.setAttribute('id', 'tabledata')
+    tableDataTemp.textContent = list.temp + "℉"
+    tableRowTemp.append(tableDataTemp)
+
+
+
 
 
 
