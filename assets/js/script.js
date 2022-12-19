@@ -564,11 +564,26 @@ function saveInfo(info) {
     localStorage.setItem("search", JSON.stringify(searchesArr))
 }
 
+
 function renderInfo() {
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
 
 
+
+    var searchDiv = document.getElementById('searchGroup')
+
+    var ulEl = document.createElement('ul')
+    ulEl.setAttribute('class', 'list-group list-group-flush')
+    searchDiv.append(ulEl)
+
+
+    // for (var i = 0; i < 10; i++) {
+    //     var liEl = document.createElement('li')
+    //     liEl.setAttribute('class', 'list-group-item')
+    //     liEl.textContent = lastInfo[i]
+    //     ulEl.append(liEl)
+    // }
 
 }
 // searchesArr.push(info)
