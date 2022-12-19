@@ -569,8 +569,28 @@ function renderInfo() {
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
 
+    displayInfo(lastInfo)
 
 
+
+    // var searchDiv = document.getElementById('searchGroup')
+
+    // var ulEl = document.createElement('ul')
+    // ulEl.setAttribute('class', 'list-group list-group-flush')
+    // searchDiv.append(ulEl)
+
+
+    // for (var i = 0; i < 10; i++) {
+    //     var liEl = document.createElement('li')
+    //     liEl.setAttribute('class', 'list-group-item')
+    //     liEl.textContent = lastInfo[i]
+    //     ulEl.append(liEl)
+    // }
+
+}
+
+function displayInfo(lastInfo) {
+    console.log(lastInfo)
     var searchDiv = document.getElementById('searchGroup')
 
     var ulEl = document.createElement('ul')
@@ -578,10 +598,18 @@ function renderInfo() {
     searchDiv.append(ulEl)
 
 
+    console.log(lastInfo[0].city)
+
+    for (var i = 0; i < lastInfo.length + 1; i++) {
+        console.log(lastInfo[i])
+    }
+
     // for (var i = 0; i < 10; i++) {
+
+
     //     var liEl = document.createElement('li')
     //     liEl.setAttribute('class', 'list-group-item')
-    //     liEl.textContent = lastInfo[i]
+    //     liEl.textContent = lastInfo[i][0]
     //     ulEl.append(liEl)
     // }
 
