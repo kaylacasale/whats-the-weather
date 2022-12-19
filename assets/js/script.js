@@ -271,7 +271,7 @@ function renderLast() {
 
         // console.log(localStorage.stateCountryArr[i])
 
-        document.querySelector(".list-group-item").innerHTML = storedValue;
+        //document.querySelector(".list-group-item").innerHTML = storedValue;
 
     }
     // var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
@@ -282,7 +282,7 @@ function renderLast() {
 function renderLast2() {
     var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
     console.log(lastSearch)
-    document.querySelector(".list-group-item2").innerHTML = lastSearch;
+    //document.querySelector(".list-group-item2").innerHTML = lastSearch;
 }
 //* what day out of future arraya has most
 //coordinates = storedCoordinates[0][0]
@@ -562,12 +562,14 @@ function saveInfo(info) {
     //     searches.push(info.elements[i])
     // }
     localStorage.setItem("search", JSON.stringify(searchesArr))
+    renderInfo(info)
 }
 
 
 function renderInfo() {
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
+
 
     displayInfo(lastInfo)
 
@@ -592,22 +594,34 @@ var displayArr = []
 console.log(displayArr)
 function displayInfo(lastInfo) {
     console.log(lastInfo)
-    var searchDiv = document.getElementById('searchGroup')
 
-    var ulEl = document.createElement('ul')
-    ulEl.setAttribute('class', 'list-group list-group-flush')
-    searchDiv.append(ulEl)
-    var liEl = document.createElement('li')
-    liEl.setAttribute('class', 'list-group-item')
-    //  liEl.textContent = lastInfo[i][0]
-    ulEl.append(liEl)
 
 
     console.log(lastInfo[0].city)
 
-    for (var i = 0; i < lastInfo.length + 1; i++) {
+    for (var i = 0; i < lastInfo.length; i++) {
         console.log(lastInfo[i])
-        liEl.innerHTML = 'lastInfo[i]'
+        // liEl.innerHTML = lastInfo[i]
+        var infoArr = lastInfo[i]
+        var searchHistory = {
+            "city": infoArr.city,
+            "state": infoArr.state,
+            "country": infoArr.country
+        }
+        console.log(searchHistory)
+        var searchDiv = document.getElementById('searchGroup')
+        var searchListText = searchHistory.city + ", " + searchHistory.state
+        console.log(searchListText)
+
+        var ulEl = document.createElement('ul')
+        ulEl.setAttribute('class', 'list-group list-group-flush')
+        searchDiv.append(ulEl)
+        var liEl = document.createElement('li')
+        liEl.setAttribute('class', 'list-group-item')
+        liEl.textContent = searchListText
+        ulEl.append(liEl)
+
+
 
 
 
@@ -808,11 +822,11 @@ function makeCardEls(list) {
 //* display dropdown upon click event on searchbar
 //* add li items from local storage
 //* hide dropdown El until click event
-var dropDownMenuEl = document.querySelector(".dropdown-menu")
-dropDownMenuEl.style.display = "none"
+//var dropDownMenuEl = document.querySelector(".dropdown-menu")
+//dropDownMenuEl.style.display = "none"
 
 searchBarEl.addEventListener("click", function () {
-    dropDownMenuEl.style.display = "block";
+    //dropDownMenuEl.style.display = "block";
     onclick = "saveInfo([info1, info2, info3])"
     //saveInfo()
 })
