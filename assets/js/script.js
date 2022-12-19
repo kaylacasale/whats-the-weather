@@ -432,6 +432,7 @@ var infolatlonFuture = function (coordinates, state) {
                 var temperatureKelvin = data.list[i].main.temp
                 var temperatureFarenheit = Math.floor((temperatureKelvin - 273.15) * (9 / 5) + 32)
                 var wind = Math.floor(data.list[i].wind.speed)
+                var humid = data.list[i].main.humidity
 
 
 
@@ -447,7 +448,8 @@ var infolatlonFuture = function (coordinates, state) {
                         "hour": dayHour,
                         "description": description,
                         "temp": temperatureFarenheit,
-                        "wind": wind
+                        "wind": wind,
+                        "humid": humid
 
                     }
 
@@ -562,6 +564,7 @@ function makeCardEls(list) {
 
     var futureDayNineAm = document.createElement('p')
     futureDayNineAm.setAttribute('class', 'future-day')
+    //futureDayNineAm.setAttribute('data-index', i)
     futureDayNineAm.textContent = list.dateFull
     forecastCardsDiv.appendChild(futureDayNineAm)
 
@@ -601,9 +604,16 @@ function makeCardEls(list) {
     table.setAttribute('class', 'card table table-striped')
     futureCardBodyDiv.append(table)
 
+    var tableBody = document.createElement('tbody')
+    tableDayAttr = list.day
+    tableBody.setAttribute('data-day', 'tableDayAttr')
+    table.append(tableBody)
+
+
+
     var tableRowTemp = document.createElement('tr')
     tableRowTemp.setAttribute('id', 'tablerow')
-    table.append(tableRowTemp)
+    tableBody.append(tableRowTemp)
 
     var tableHeaderTemp = document.createElement('th')
     tableHeaderTemp.textContent = "Temp: "
@@ -617,7 +627,7 @@ function makeCardEls(list) {
 
     var tableRowWind = document.createElement('tr')
     tableRowWind.setAttribute('id', 'tablerow')
-    table.append(tableRowWind)
+    tableBody.append(tableRowWind)
 
     var tableHeaderWind = document.createElement('th')
     tableHeaderWind.textContent = "Wind: "
@@ -628,6 +638,21 @@ function makeCardEls(list) {
     tableDataWind.setAttribute('id', 'tabledata')
     tableDataWind.textContent = list.wind + "mph"
     tableRowWind.append(tableDataWind)
+
+    var tableRowHumid = document.createElement('tr')
+    tableRowHumid.setAttribute('id', 'humid')
+    tableBody.append(tableRowHumid)
+
+    var tableHeaderHumid = document.createElement('th')
+    tableHeaderHumid.textContent = "Humid: "
+    tableRowHumid.append(tableHeaderHumid)
+
+    var tableDataHumid = document.createElement('td')
+    tableDataHumid.setAttribute('class', 'humid')
+    tableDataHumid.setAttribute('id', 'tabledata')
+    tableDataHumid.textContent = list.humid + '%'
+    tableRowHumid.append(tableDataHumid)
+
 
 
 

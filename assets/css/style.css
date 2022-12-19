@@ -2,14 +2,29 @@
     display: table;
     justify-content: space-between;
 } */
+table {
+    overflow: scroll;
+}
 
 /* #tabledata {
     float: inline-end;
 } */
+/* tbody {
+    word-wrap: initial;
+} */
+/* td {
+    width: fit-content;
+    overflow: hidden;
+} */
 
 #tablerow {
-    width: inherit;
+    width: fit-content;
 }
+
+/* #tabledata {
+    width: inherit;
+} */
+
 
 #search-bar {
     height: 40px;
