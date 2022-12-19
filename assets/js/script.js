@@ -392,10 +392,11 @@ var infolatlonFuture = function (coordinates, state) {
 
 
             for (var i = 0; i < datelist.length; i++) {
-                var
-                var delta = Math.floor(datelist.length /
+                var skip = 8
+                var delta = Math.floor(datelist.length / skip)
+                console.log(delta)
 
-                for (var j = 0; j < datelist[i].length; j++) {
+                for (var j = 0; j < datelist[i].length; j = j + delta) {
                     var cardsDiv = document.createElement('div');
                     cardAttr = dayjs().day(j).format('D')
                     cardsDiv.setAttribute('data-day', 'cardAttr')
@@ -403,11 +404,12 @@ var infolatlonFuture = function (coordinates, state) {
 
 
                     console.log(cardAttr)
+                    conseol.log(forecastCardsDiv)
+                    return cardAttr
 
                 }
-                cardAttr = dayjs().day(j).format('D')
-                console.log(cardAttr)
-                console.log()
+                //cardAttr = dayjs().day(j).format('D')
+                //console.log(cardAttr)
                 console.log(datelist[i])
                 console.log(datelist[i].dt_txt)
 
@@ -419,19 +421,30 @@ var infolatlonFuture = function (coordinates, state) {
                 console.log(dayandtime)
                 dayNumber = dayjs(datetimeSee).format('D');
                 console.log(dayNumber)
+                dayHour = dayjs(datetimeSee).format('h A')
+                console.log(dayHour)
+                var arrLength = datelist[i].length
+                console.log(arrLength)
+                var cardNumber = arrLength / 8
+                console.log(cardNumber)
 
-                list = {
-                    "dateLong": datetimeSee,
-                    "dateFull": dayandtime,
-                    "day": dayNumber
+                if (dayHour == '9 AM') {
+                    list = {
+
+                        "dateLong": datetimeSee,
+                        "dateFull": dayandtime,
+                        "day": dayNumber,
+                        "hour": dayHour
+
+                    }
+
+                    //for (var i = 0; i < datelist[i].length; i = i + cardNumber) {
+                    //console.log(list.date)
+                    console.log(list.dateFull)
+                    console.log(dayNumber)
+                    console.log(list)
+                    makeCardEls(list)
                 }
-
-                //console.log(list.date)
-                console.log(list.dateFull)
-                console.log(dayNumber)
-                console.log(list)
-                makeCardEls(list)
-
                 // for (var j = 0; i < data.list.length; j++) {
                 //     var forecastCardsDiv = document.createElement('div')
                 //     rowCardAttr = list.dayNumber
@@ -521,56 +534,69 @@ containerDiv = document.getElementById('newCards')
 //console.log(data)
 
 function makeCardEls(list) {
-    for (i = 0; i < list.length; i++) {
-        var forecastCardsDiv = document.createElement('div')
-        console.log(list.datetimeSee)
-        //rowCardAttr = dayjs(data).day(i).format('D')
-        var futuredate = dayjs(data.list[i].dt_txt).format('D'); //20, 21, 22
-        console.log(futuredate)
-
-        rowCardAttr = futuredate[i]
-        forecastCardsDiv.setAttribute('data-day', rowCardAttr)
-        forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
-        containerDiv.appendChild(forecastCardsDiv)
-        // console.log(i)
-        // console.log(data)
-        // console.log(data.list[i].dt_txt)
-        // console.log(data.list.length)
-        // var forecastCardsRowHeader = document.createElement('h3');
-        // console.log(data)
-        // rowCardAttr = dayjs(data).day(i).format('D')
-        // console.log(data)
-        // //var futureDate = dayjs().day(data.list[i].dt_txt).format('dddd, MMM D');
-        // //console.log(futureDate)
-        // rowCardAttribute = dayjs().day(data.list[i]).format('dddd, MMM D');
-        // console.log(rowCardAttribute = dayjs(data.list[i].dt_txt).format('dddd, MMM D'));
-
-        // forecastCardsRowHeader.setAttribute('data-hour', rowCardAttribute)
-
-        //console.log(data[i])
-
-        //forecastCardsRowHeader.setAttribute('class', 'cards');
-        //forecastCardsRowHeader.textContent = data[i].dt_txt;
-        // console.log(data.list[0])
-        // var futuredate = dayjs(data.list[i].dt_txt).format('dddd, MMM D');
-        // var forecastCardsDiv = document.createElement('div')
-        // rowCardAttr = dayjs(data).day(i).format('D')
-        // dayjs(data).day(i).format('D')
-        // // forecastCardsDiv.setAttribute('data-day', rowCardAttr)
-        // // console.log(rowCardAttr)
+    console.log(list)
 
 
-        // //  rowCardAttribute = dayjs(data.list[i].dt_txt).format('dddd, MMM D');
-        // //forecastCardsDiv.setAttribute('data-day', rowCardAttribute)
 
 
-        // forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
-        // //forecastCardsDiv.textContent = dayjs(data.list[i].dt_txt).format('dddd, MMM D')
-        // containerDiv.appendChild(forecastCardsDiv);
+    //for (i = 0; i < list.length; i++) {
+    forecastCardsDiv = document.createElement('div')
+    forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+
+    cardAttr = list.day
+    forecastCardsDiv.setAttribute('data-day', 'cardAttr')
+    containerDiv.appendChild(forecastCardsDiv)
 
 
-    }
+
+    //     console.log(list.day)
+    //     //rowCardAttr = dayjs(data).day(i).format('D')
+    //     var futuredate = dayjs(data.list[i].dt_txt).format('D'); //20, 21, 22
+    //     console.log(futuredate)
+
+    //     rowCardAttr = futuredate[i]
+    //     forecastCardsDiv.setAttribute('data-day', rowCardAttr)
+    //     forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+    //     containerDiv.appendChild(forecastCardsDiv)
+    // console.log(i)
+    // console.log(data)
+    // console.log(data.list[i].dt_txt)
+    // console.log(data.list.length)
+    // var forecastCardsRowHeader = document.createElement('h3');
+    // console.log(data)
+    // rowCardAttr = dayjs(data).day(i).format('D')
+    // console.log(data)
+    // //var futureDate = dayjs().day(data.list[i].dt_txt).format('dddd, MMM D');
+    // //console.log(futureDate)
+    // rowCardAttribute = dayjs().day(data.list[i]).format('dddd, MMM D');
+    // console.log(rowCardAttribute = dayjs(data.list[i].dt_txt).format('dddd, MMM D'));
+
+    // forecastCardsRowHeader.setAttribute('data-hour', rowCardAttribute)
+
+    //console.log(data[i])
+
+    //forecastCardsRowHeader.setAttribute('class', 'cards');
+    //forecastCardsRowHeader.textContent = data[i].dt_txt;
+    // console.log(data.list[0])
+    // var futuredate = dayjs(data.list[i].dt_txt).format('dddd, MMM D');
+    // var forecastCardsDiv = document.createElement('div')
+    // rowCardAttr = dayjs(data).day(i).format('D')
+    // dayjs(data).day(i).format('D')
+    // // forecastCardsDiv.setAttribute('data-day', rowCardAttr)
+    // // console.log(rowCardAttr)
+
+
+    // //  rowCardAttribute = dayjs(data.list[i].dt_txt).format('dddd, MMM D');
+    // //forecastCardsDiv.setAttribute('data-day', rowCardAttribute)
+
+
+    // forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
+    // //forecastCardsDiv.textContent = dayjs(data.list[i].dt_txt).format('dddd, MMM D')
+    // containerDiv.appendChild(forecastCardsDiv);
+
+
 }
+
 //* display dropdown upon click event on searchbar
 //* add li items from local storage
 //* hide dropdown El until click event
