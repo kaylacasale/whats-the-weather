@@ -386,6 +386,17 @@ var infolatlonFuture = function (coordinates, state) {
             var datelist = data.list
             //makeCardEls(data)
 
+            info = {
+                "city": data.city.name,
+                "state": state,
+                "country": data.city.country,
+                "coord": data.city.coord
+            }
+            console.log(info)
+            searchesArr.push(info)
+            saveInfo(info)
+            // info.setAttribute('data-index', info.elements["i"])
+            // console.log(info.elements)
 
             // var datetime1 = data.list[1].dt_text;
             // console.log(datetime1)
@@ -541,6 +552,25 @@ var infolatlonFuture = function (coordinates, state) {
 
         })
 }
+var searchesArr = []
+
+function saveInfo(info) {
+    console.log(info)
+    // var searches = {};
+    // for (var i = 0; i < info.length; i++) {
+    //     searches.push(info.elements[i])
+    // }
+    localStorage.setItem("search", JSON.stringify(searchesArr))
+}
+// searchesArr.push(info)
+// localStorage.setItem("info", JSON.stringify(searchArr))
+
+// for (var i = 0; i < info.length; i++) {
+//     let value = info
+//     let key = info[i++]
+//     localStorage.setItem(key, value)
+// }
+
 
 //* generate elements and assign to classes with data attributes
 
@@ -722,6 +752,8 @@ dropDownMenuEl.style.display = "none"
 
 searchBarEl.addEventListener("click", function () {
     dropDownMenuEl.style.display = "block";
+    onclick = "saveInfo([info1, info2, info3])"
+    //saveInfo()
 })
 
 //* if day number increased, log the increased date day in the next card
