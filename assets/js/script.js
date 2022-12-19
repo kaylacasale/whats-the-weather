@@ -382,6 +382,7 @@ var infolatlonNow = function (coordinates, state) {
 }
 
 //* 5-day Weather Forecast cards:
+var containerDiv = document.getElementById('newCards')
 
 var infolatlonFuture = function (coordinates, state) {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=981e313affd3213b334e9460a4970735`)
@@ -415,7 +416,11 @@ var infolatlonFuture = function (coordinates, state) {
             console.log(time)
             var datelist = data.list
             var searchBarDiv = document.getElementById('searchGroup')
+
+            //* reset searchbar list div to only redisplay most recent search
             searchBarDiv.textContent = ""
+            containerDiv.textContent = ""
+
             //makeCardEls(data)
 
             info = {
@@ -435,6 +440,7 @@ var infolatlonFuture = function (coordinates, state) {
             // console.log(datetime1)
 
 
+
             for (var i = 0; i < datelist.length; i++) {
                 var skip = 8
                 var delta = Math.floor(datelist.length / skip)
@@ -448,7 +454,7 @@ var infolatlonFuture = function (coordinates, state) {
 
 
                     console.log(cardAttr)
-                    conseol.log(forecastCardsDiv)
+                    // conseol.log(forecastCardsDiv)
                     return cardAttr
 
                 }
@@ -780,7 +786,9 @@ function displayInfo(lastInfo) {
 
 function makeCardEls(list) {
     //document.getElementById('newCards').textContent = " "
+
     var containerDiv = document.getElementById('newCards')
+
     console.log(list)
 
 
@@ -788,6 +796,7 @@ function makeCardEls(list) {
 
     //for (i = 0; i < list.length; i++) {
     forecastCardsDiv = document.createElement('div')
+
     forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
     forecastCardsDiv.style["boxShadow"] = "5px";
 
