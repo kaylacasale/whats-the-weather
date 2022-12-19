@@ -417,7 +417,7 @@ var infolatlonFuture = function (coordinates, state) {
 
                 var datetimeSee = data.list[i].dt_txt;
                 console.log(datetimeSee)
-                dayandtime = dayjs(datetimeSee).format('MMM D h:mm A');
+                dayandtime = dayjs(datetimeSee).format('dddd, MMM D');
                 console.log(dayandtime)
                 dayNumber = dayjs(datetimeSee).format('D');
                 console.log(dayNumber)
@@ -426,7 +426,12 @@ var infolatlonFuture = function (coordinates, state) {
                 var arrLength = datelist[i].length
                 console.log(arrLength)
                 var cardNumber = arrLength / 8
-                console.log(cardNumber)
+                //console.log(cardNumber)
+                var description = data.list[i].weather[0].description;
+                console.log(description)
+
+
+
 
                 if (dayHour == '9 AM') {
                     list = {
@@ -434,7 +439,8 @@ var infolatlonFuture = function (coordinates, state) {
                         "dateLong": datetimeSee,
                         "dateFull": dayandtime,
                         "day": dayNumber,
-                        "hour": dayHour
+                        "hour": dayHour,
+                        "description": description
 
                     }
 
@@ -549,8 +555,37 @@ function makeCardEls(list) {
 
     var futureDayNineAm = document.createElement('p')
     futureDayNineAm.setAttribute('class', 'future-day')
-    futureDayNineAm.textContent = list.day
+    futureDayNineAm.textContent = list.dateFull
     forecastCardsDiv.appendChild(futureDayNineAm)
+
+    var futureDayTime = document.createElement('p')
+    futureDayTime.textContent = list.hour
+    forecastCardsDiv.appendChild(futureDayTime)
+
+    var futureCardBodyDiv = document.createElement('div')
+    futureCardBodyDiv.setAttribute('class', 'card card-body')
+    // futureCardBodyDiv.setAttribute('data-index', i)
+    forecastCardsDiv.appendChild(futureCardBodyDiv)
+
+    var cardIcon = document.createElement('i')
+    //cardIcon.setAttribute('data-index', i)
+    cardIcon.setAttribute('class', 'material-icons')
+    cardIcon.setAttribute('style', 'font-size: 48px')
+
+    if (list.description.includes("clear")) {
+        cardIcon.textContent = "brightness_5"
+    }
+
+    if (list.description.includes("clouds", "cloudy")) {
+        cardIcon.textContent = "cloud"
+    }
+    futureCardBodyDiv.append(cardIcon)
+
+
+
+
+
+
 
 
 
