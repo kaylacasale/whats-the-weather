@@ -286,14 +286,42 @@ function renderLast2() {
 }
 //* what day out of future arraya has most
 //coordinates = storedCoordinates[0][0]
-function init(coordinates) {
+function init() {
+    // document.getElementById('newCards').textContent = " "
+
     // coordinates = storedCoordinates[0][0]
     renderLast();
     renderLast2();
 
     renderInfo()
+    //renderLastList();
+    //displayList();
+    // getLastCoord()
+
+
+    // var lastCoord = JSON.parse(localStorage.getItem("la"))
+    // console.log(lastList)
+    // makeCardEls(lastList)
+    //latlon(coordinates)
+    //infolatlonFuture(coordinates)
 
 }
+
+
+
+// var lastCoord = JSON.parse(localStorage.getItem("forLatLonFun"))
+// console.log(lastCoord)
+// var coordinates = lastCoord.coord
+// var state = lastCoord.state
+
+
+// coord = {
+//     lastCoord.
+// }
+//infolatlonNow(lastCoordinates, lastState)
+
+
+
 var infolatlonNow = function (coordinates, state) {
     fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=981e313affd3213b334e9460a4970735`)
         .then(response => response.json())
@@ -596,13 +624,15 @@ function renderInfo() {
 
 }
 
-function passCoord(searchCoord) {
-    console.log(searchCoord)
-    //init(searchCoord)
+// function passCoord(searchCoord) {
+//     console.log(searchCoord)
+//     //init(searchCoord)
+//     //init(searchCoord)
 
-}
+// }
 var displayArr = []
 console.log(displayArr)
+
 function displayInfo(lastInfo) {
     console.log(lastInfo)
     console.log(lastInfo[0].city)
@@ -618,9 +648,12 @@ function displayInfo(lastInfo) {
         }
 
         var searchCoord = {
-            "coord": infoArr.coord
+            "coord": infoArr.coord,
+            'state': infoArr.state
         }
-        passCoord(searchCoord)
+        //saveStateCoord(searchCoord)
+
+
 
         console.log(searchHistory)
         var searchDiv = document.getElementById('searchGroup')
@@ -667,13 +700,77 @@ function displayInfo(lastInfo) {
 //     var lastList = JSON.parse(localStorage.getItem(""))
 // }
 
+// function saveStateCoord(searchCoord) {
+//     localStorage.setItem("forLatLonFun", JSON.stringify(searchCoord))
+
+// }
+// function saveList(list) {
+//     console.log(list)
+//     localStorage.setItem("lastList", JSON.stringify(list))
+
+// }
+
+
+// function renderLastList() {
+//     document.getElementById('newCards').textContent = " "
+//     var last = JSON.parse(localStorage.getItem("lastList"))
+//     displayList(last)
+
+//     // for (var i = 0; i < lastList.length; i++) {
+//     //     var lastArr = last[i]
+//     //     var lastList = {
+//     //         "dateLong": lastArr.dateLong,
+//         "dateFull": lastArr.dateFull,
+//         "day": lastArr.day,
+//         "hour": lastArr.hour,
+//         "description": lastArr.description,
+//         "temp": lastArr.temp,
+//         "wind": lastArr.wind,
+//         "humid": lastArr.humid,
+
+//     }
+//     makeCardEls(lastList)
+//     init(lastList)
+//     // console.log(list)
+
+// }
+// console.log(lasList)
+
+//document.getElementById('newCards').textContent = " "
+// makeCardEls(lastList)
+// }
+
+// function displayList(last) {
+//     for (var i = 0; i < 6; i++) {
+//         var lastArr = last[i]
+//         var lastList = {
+//             dateLong: lastArr.dateLong,
+//             dateFull: lastArr.dateFull,
+//             day: lastArr.day,
+//             hour: lastArr.hour,
+//             description: lastArr.description,
+//             "temp": lastArr.temp,
+//             "wind": lastArr.wind,
+//             "humid": lastArr.humid,
+
+//         }
+//         makeCardEls(lastList)
+//         console.log(lastList)
+//         // init(lastList)
+//         // console.log(list)
+
+//     }
+// }
+
 //* generate elements and assign to classes with data attributes
 
-containerDiv = document.getElementById('newCards')
+
 //var day = data.list
 //console.log(data)
 
 function makeCardEls(list) {
+    //document.getElementById('newCards').textContent = " "
+    var containerDiv = document.getElementById('newCards')
     console.log(list)
 
 
@@ -684,7 +781,7 @@ function makeCardEls(list) {
     forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
     forecastCardsDiv.style["boxShadow"] = "5px";
 
-    cardAttr = list.day
+    //cardAttr = list.day
     forecastCardsDiv.setAttribute('data-day', 'cardAttr')
     containerDiv.appendChild(forecastCardsDiv)
 
@@ -779,6 +876,8 @@ function makeCardEls(list) {
     tableDataHumid.textContent = list.humid + '%'
     tableRowHumid.append(tableDataHumid)
 
+    //saveList(list)
+
 
 
 
@@ -849,7 +948,7 @@ searchBarEl.addEventListener("click", function () {
     //dropDownMenuEl.style.display = "block";
     onclick = "saveInfo([info1, info2, info3])"
 
-    //saveInfo()
+    saveInfo()
 })
 
 //* if day number increased, log the increased date day in the next card
@@ -942,3 +1041,11 @@ searchBarEl.addEventListener("click", function () {
 
 
 
+function start() {
+    var pulled = JSON.parse(localStorage.getItem('search'))
+    console.log(pulled[0])
+    city = pulled[0].city
+    latlon(city)
+}
+
+start()
