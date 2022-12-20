@@ -615,8 +615,11 @@ function renderInfo() {
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
 
+    if (lastInfo) {
+        displayInfo(lastInfo)
 
-    displayInfo(lastInfo)
+    }
+
 
 
 
@@ -646,8 +649,8 @@ var displayArr = []
 console.log(displayArr)
 
 function displayInfo(lastInfo) {
-    console.log(lastInfo)
-    console.log(lastInfo[0].city)
+    // console.log(lastInfo)
+    // console.log(lastInfo[0].city)
 
 
 
@@ -1076,9 +1079,12 @@ searchBarEl.addEventListener("click", function () {
 
 function start() {
     var pulled = JSON.parse(localStorage.getItem('search'))
-    console.log(pulled[0])
-    city = pulled[0].city
-    latlon(city)
+    if (pulled) {
+        console.log(pulled[0])
+        city = pulled[0].city
+        latlon(city)
+    }
+
 
 }
 
