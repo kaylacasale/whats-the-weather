@@ -483,6 +483,7 @@ var infolatlonFuture = function (coordinates, state) {
                 var temperatureFarenheit = Math.floor((temperatureKelvin - 273.15) * (9 / 5) + 32)
                 var wind = Math.floor(data.list[i].wind.speed)
                 var humid = data.list[i].main.humidity
+                var icon = data.list[i].weather[0].icon
 
 
 
@@ -500,6 +501,7 @@ var infolatlonFuture = function (coordinates, state) {
                         "temp": temperatureFarenheit,
                         "wind": wind,
                         "humid": humid,
+                        "icon": icon,
 
                     }
 
@@ -819,22 +821,28 @@ function makeCardEls(list) {
     // futureCardBodyDiv.setAttribute('data-index', i)
     forecastCardsDiv.appendChild(futureCardBodyDiv)
 
-    var cardIcon = document.createElement('i')
+    var cardIcon = document.createElement('img')
+    cardIcon.setAttribute('id', 'icon')
+    var iconCode = list.icon
+    var iconUrl = "https://openweathermap.org/img/w/" + iconCode + ".png";
+    cardIcon.setAttribute('src', iconUrl)
+    //cardIcon.textContent = iconUrl
+
     //cardIcon.setAttribute('data-index', i)
-    cardIcon.setAttribute('class', 'material-icons')
-    cardIcon.setAttribute('style', 'font-size: 48px')
+    // cardIcon.setAttribute('class', 'material-icons')
+    // cardIcon.setAttribute('style', 'font-size: 48px')
 
-    if (list.description.includes("clear")) {
-        cardIcon.textContent = "brightness_5"
-    }
+    // if (list.description.includes("clear")) {
+    //     cardIcon.textContent = "brightness_5"
+    // }
 
-    if (list.description.includes("clouds", "cloudy")) {
-        cardIcon.textContent = "cloud"
-    }
+    // if (list.description.includes("clouds", "cloudy")) {
+    //     cardIcon.textContent = "cloud"
+    // }
 
-    if (list.description.includes("rain", "rainy")) {
-        cardIcon.textContent = "opacity"
-    }
+    // if (list.description.includes("rain", "rainy")) {
+    //     cardIcon.textContent = "opacity"
+    // }
     futureCardBodyDiv.append(cardIcon)
 
     var description = document.createElement('p')
