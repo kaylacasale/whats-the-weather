@@ -675,6 +675,7 @@ function displayInfo(lastInfo) {
         var searchListText = searchHistory.city + ", " + searchHistory.state
         console.log(searchListText)
 
+
         var ulEl = document.createElement('ul')
         ulEl.setAttribute('class', 'list-group list-group-flush')
         searchDiv.append(ulEl)
@@ -801,6 +802,8 @@ function makeCardEls(list) {
 
     forecastCardsDiv.setAttribute('class', 'card col-12 col-md-3 col-lg-2 shadow-xl p-3 mx-2')
     forecastCardsDiv.style["boxShadow"] = "5px";
+    forecastCardsDiv.style["background"] = "radial-gradient(circle, rgba(80,191,210,1) 0%, rgba(37,174,179,1) 42%, rgba(20,213,183,1) 68%, rgba(0,212,255,1) 100%)"
+    forecastCardsDiv.style["borderColor"] = "CAF0F8"
 
     //cardAttr = list.day
     forecastCardsDiv.setAttribute('data-day', 'cardAttr')
@@ -818,6 +821,7 @@ function makeCardEls(list) {
 
     var futureCardBodyDiv = document.createElement('div')
     futureCardBodyDiv.setAttribute('class', 'card card-body')
+    futureCardBodyDiv.style["backgroundColor"] = "#CAF0F8"
     // futureCardBodyDiv.setAttribute('data-index', i)
     forecastCardsDiv.appendChild(futureCardBodyDiv)
 

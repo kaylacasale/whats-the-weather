@@ -2,8 +2,18 @@
     display: table;
     justify-content: space-between;
 } */
+body {
+    /* // background-color: rgb(2, 0, 36); */
+    background: rgb(68, 76, 156);
+    background: radial-gradient(circle, rgba(68, 76, 156, 1) 0%, rgba(37, 174, 179, 1) 42%, rgba(0, 212, 255, 1) 100%);
+}
+
 table {
     overflow: scroll;
+}
+
+#searchtxt {
+    color: white;
 }
 
 /* #styleCards {
