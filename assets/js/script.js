@@ -261,37 +261,37 @@ var allListItems = document.querySelectorAll("list-group-item")
 //     init(storedCoordinates[0][0])
 // }
 //* render 1st search
-function renderLast() {
-    for (var i = 0; i < localStorage.length; i++) {
-        //var storedSearch = JSON.parse(localStorage.getItem("searchArr"[i]))
-        console.log(JSON.parse(localStorage.getItem("stateCountryArr")))
-        var stored = JSON.parse(localStorage.getItem("stateCountryArr"))
-        console.log(stored.stateCountry)
-        storedValue = stored.stateCountry
+// function renderLast() {
+//     for (var i = 0; i < localStorage.length; i++) {
+//         //var storedSearch = JSON.parse(localStorage.getItem("searchArr"[i]))
+//         console.log(JSON.parse(localStorage.getItem("stateCountryArr")))
+//         var stored = JSON.parse(localStorage.getItem("stateCountryArr"))
+//         console.log(stored.stateCountry)
+//         storedValue = stored.stateCountry
 
-        // console.log(localStorage.stateCountryArr[i])
+//         // console.log(localStorage.stateCountryArr[i])
 
-        //document.querySelector(".list-group-item").innerHTML = storedValue;
+//         //document.querySelector(".list-group-item").innerHTML = storedValue;
 
-    }
-    // var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
-    // console.log(lastSearch)
-    // document.querySelector(".list-group-item").innerHTML = lastSearch;
-}
+//     }
+//     // var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
+//     // console.log(lastSearch)
+//     // document.querySelector(".list-group-item").innerHTML = lastSearch;
+// }
 
-function renderLast2() {
-    var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
-    console.log(lastSearch)
-    //document.querySelector(".list-group-item2").innerHTML = lastSearch;
-}
+// function renderLast2() {
+//     var lastSearch = JSON.parse(localStorage.getItem("stateCountry"));
+//     console.log(lastSearch)
+//     //document.querySelector(".list-group-item2").innerHTML = lastSearch;
+// }
 //* what day out of future arraya has most
 //coordinates = storedCoordinates[0][0]
 function init() {
     // document.getElementById('newCards').textContent = " "
 
     // coordinates = storedCoordinates[0][0]
-    renderLast();
-    renderLast2();
+    // renderLast();
+    // renderLast2();
 
     renderInfo()
     //renderLastList();
