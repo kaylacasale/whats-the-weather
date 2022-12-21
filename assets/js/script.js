@@ -5,8 +5,8 @@
 var datePEl = document.querySelector(".date");
 var today = dayjs().format('MMM D, YYYY');
 datePEl.textContent = today;
-var hourNow = dayjs().format('h A')
-console.log(hourNow)
+// var hourNow = dayjs().format('h A')
+//console.log(hourNow)
 
 //* grab time p element .time
 //* use dayJS to find current time and assign to variable 'time'
@@ -486,13 +486,14 @@ var infolatlonFuture = function (coordinates, state) {
                 var wind = Math.floor(data.list[i].wind.speed)
                 var humid = data.list[i].main.humidity
                 var icon = data.list[i].weather[0].icon
+                var hourNow = dayjs().format('h A')
 
 
 
 
 
 
-                if (dayHour == hourNow) {
+                if (dayHour == hourNow || dayHour == '9 AM') {
                     list = {
 
                         "dateLong": datetimeSee,
@@ -516,6 +517,7 @@ var infolatlonFuture = function (coordinates, state) {
                     // listArr.push(list)
                     //saveLastList(list)
                 }
+
                 // for (var j = 0; i < data.list.length; j++) {
                 //     var forecastCardsDiv = document.createElement('div')
                 //     rowCardAttr = list.dayNumber
@@ -534,9 +536,9 @@ var infolatlonFuture = function (coordinates, state) {
                 // containerDiv.appendChild(forecastCardsDiv)
 
             }
-            console.log(list.dateFull)
+            // console.log(list.dateFull)
 
-            console.log(dayNumber)
+            // console.log(dayNumber)
 
             // var cardHeader = document.querySelector(".cards")
             // cardHeader.textContent = day
@@ -681,14 +683,27 @@ function displayInfo(lastInfo) {
         console.log(searchListText)
 
 
+        // var ulEl = document.createElement('ul')
+        // ulEl.setAttribute('class', 'list-group list-group-flush')
+        // searchDiv.append(ulEl)
+        // var liEl = document.createElement('li')
+        // liEl.setAttribute('class', 'list-group-item')
+        // liEl.textContent = searchListText
+        // ulEl.append(liEl)
+
         var ulEl = document.createElement('ul')
         ulEl.setAttribute('class', 'list-group list-group-flush')
         searchDiv.append(ulEl)
-        var liEl = document.createElement('li')
-        liEl.setAttribute('class', 'list-group-item')
-        liEl.textContent = searchListText
-        ulEl.append(liEl)
+        //var liEl = document.createElement('li')
+        var buttonEl = document.createElement('button')
+        buttonEl.setAttribute('type', 'button')
+        // liEl.setAttribute('class', 'list-group-item')
+        buttonEl.setAttribute('class', 'list-group-item list-group-item-action')
+        // liEl.textContent = searchListText
+        buttonEl.textContent = searchListText
 
+        //ulEl.append(liEl)
+        ulEl.append(buttonEl)
 
 
 
