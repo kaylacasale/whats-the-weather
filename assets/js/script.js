@@ -5,6 +5,8 @@
 var datePEl = document.querySelector(".date");
 var today = dayjs().format('MMM D, YYYY');
 datePEl.textContent = today;
+var hourNow = dayjs().format('h A')
+console.log(hourNow)
 
 //* grab time p element .time
 //* use dayJS to find current time and assign to variable 'time'
@@ -490,7 +492,7 @@ var infolatlonFuture = function (coordinates, state) {
 
 
 
-                if (dayHour == '9 AM') {
+                if (dayHour == hourNow) {
                     list = {
 
                         "dateLong": datetimeSee,
