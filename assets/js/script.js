@@ -675,7 +675,7 @@ function displayInfo(lastInfo) {
         }
         //saveStateCoord(searchCoord)
 
-
+        // generateSearch(lastInfo[0])
 
         console.log(searchHistory)
         var searchDiv = document.getElementById('searchGroup')
@@ -699,15 +699,95 @@ function displayInfo(lastInfo) {
         buttonEl.setAttribute('type', 'button')
         // liEl.setAttribute('class', 'list-group-item')
         buttonEl.setAttribute('class', 'list-group-item list-group-item-action')
+        buttonEl.setAttribute('data-index', i)
         // liEl.textContent = searchListText
         buttonEl.textContent = searchListText
 
         //ulEl.append(liEl)
         ulEl.append(buttonEl)
 
+        // let listBtns = document.querySelectorAll('.list-group-item')
+        // listBtns.forEach(function (btn) {
+
+        //     // console.log(buttonEl.textContent)
+        //     btn.addEventListener('click', generateSearch)
+        // })
+        // var selectedListBtns = document.querySelectorAll(`[data-index="${i}"`)
+        // selectedListBtns.forEach(function (btn) {
+        //     btn.addEventListener('click', function () {
+        //         for (var i = ind; i < 10; i++) {
+        //             console.log(ind)
+        //         }
+        //     })
+        // })
+        var selectList = document.querySelector(`[data-index="${i}"`)
+        let ind = selectList.dataset.index
+        console.log(ind)
 
 
+
+        selectList.addEventListener('click', function () {
+            console.log(ind)
+            generateSearch(ind)
+        })
     }
+    // var listBtns = document.querySelectorAll('.list-group-item')
+    // console.log(listBtns)
+
+
+    //console.log(ind)
+    // let some = indexOf(selectList)
+    console.log(selectList)
+    // listBtns.forEach(function (btn) {
+
+    //     btn.addEventListener('click', function () {
+    //         var listed = JSON.parse(localStorage.getItem("search"))
+    //         for (var i = 0; i < listed.length; i++) {
+
+
+
+    //             var txt = selectList
+    //             console.log(txt)
+    //             console.log(listed)
+    //             let listing = listed[i]
+    //             console.log(listing)
+    //             let listCity = listed[i].city
+    //             console.log(listCity)
+    //             // let ind = btn.dataset.index
+    //             // console.log(ind)
+    //             // let some = listCity.indexOf()
+    //             latlon(listCity)
+
+    //             var selectList = document.querySelector(`[data-index="${i}"`)
+    //             // console.log(selectedList.data(index))
+    //             console.log(selectList)
+    //             //  document.querySelector(listBtns[i])
+
+    //         }
+    //     })
+
+    // })
+    // listBtn.addEventListener('click', function () {
+    //     var listed = JSON.parse(localStorage.getItem("search"))
+    //     for (var i = 0; i < listed.length; i++) {
+    //         console.log(listed)
+
+
+
+    //     }
+    // })
+    // function generateSearch() {
+    //     console.log(lastInfo)
+    //     if (city) {
+    //         var city = lastInfo[0]
+    //         latlon(city)
+
+    //     }
+
+
+
+    // }
+
 
     // for (var i = 0; i < 10; i++) {
 
@@ -719,6 +799,94 @@ function displayInfo(lastInfo) {
     // }
 
 }
+
+// var listBtns = document.querySelectorAll('.list-group-item')
+
+
+// for (var i = 0; i < listBtns.length; i++) {
+//     var selectList = document.querySelector(`[data-index="${i}"`)
+//     let ind = selectList.dataset.index
+//     console.log(ind)
+
+//     selectList.addEventListener('click', function () {
+//         console.log(ind)
+//         generateSearch(ind)
+//     })
+// }
+
+function generateSearch(ind) {
+    // var ind = selectedList.dataset.index
+    console.log(ind)
+    var listed = JSON.parse(localStorage.getItem("search"))
+    console.log(listed)
+    var listTxt = listed[ind]
+    console.log(listTxt)
+    var listCity = listed[ind].city
+    console.log(listCity)
+
+    // latlon(listCity)
+
+}
+
+
+// var listBtns = document.querySelectorAll('.list-group-item')
+// console.log(listBtns)
+
+// // var selectList = document.querySelector(`[data-index="${i}"`)
+// // console.log(selectList)
+// listBtns.forEach(function (btn) {
+//     btn.addEventListener('click', function () {
+//         var listed = JSON.parse(localStorage.getItem("search"))
+//         for (var i = 0; i < listed.length; i++) {
+
+//             // var listBtn = listBtns[i]
+//             // console.log(listBtn)
+
+//             // var txt = selectList
+//             // console.log(txt)
+//             // console.log(listed)
+//             let listing = listed[i]
+//             console.log(listing)
+//             let listCity = listed[i].city
+//             console.log(listCity)
+//             console.log(indexOf(listed))
+
+//             latlon(listCity)
+
+//             var selectList = document.querySelector(`[data-index="${i}"`)
+//             // console.log(selectedList.data(index))
+//             console.log(selectList)
+//             //  document.querySelector(listBtns[i])
+
+//         }
+//     })
+
+// })
+
+
+// function searchList() {
+//     var listed = JSON.parse(localStorage.getItem("search"))
+//     for (var i = 0; i < search.length; i++) {
+//         var listBtn = document.querySelector('.list-group-item')
+//         listBtn.addEventListener('click', function () {
+//             console.log('hi')
+//             search = listed[i]
+//             console.log(search)
+//         })
+
+//     }
+// }
+// function generateSearch() {
+//     console.log(document.querySelector('.list-group-item'))
+//     //let buttonTxt = document.querySelector('.list-group-item').
+//     //console.log(buttonTxt)
+//     // let listItem = document.querySelector('.list-group-item')
+//     // console.log(listItem)
+//     console.log(document.querySelectorAll('.list-group-item'))
+
+
+// }
+// console.log(document.querySelector('.list-group-item'))
 // searchesArr.push(info)
 // localStorage.setItem("info", JSON.stringify(searchArr))
 
