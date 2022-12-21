@@ -493,7 +493,7 @@ var infolatlonFuture = function (coordinates, state) {
 
 
 
-                if (dayHour == hourNow || dayHour == '9 AM') {
+                if (dayHour == '9 AM') {
                     list = {
 
                         "dateLong": datetimeSee,
@@ -727,6 +727,7 @@ function displayInfo(lastInfo) {
 
 
         selectList.addEventListener('click', function () {
+            lastInfo = ""
             console.log(ind)
             generateSearch(ind)
         })
@@ -821,12 +822,22 @@ function generateSearch(ind) {
     console.log(listed)
     var listTxt = listed[ind]
     console.log(listTxt)
-    var listCity = listed[ind].city
-    console.log(listCity)
+    var city = listed[ind].city
+    console.log(city)
+    // latlon(city)
+
+
+    //sendSearch(listCity)
 
     // latlon(listCity)
 
 }
+
+// function sendSearch(listCity) {
+//     if (listCity) {
+//         latlon(listCity)
+//     }
+// }
 
 
 // var listBtns = document.querySelectorAll('.list-group-item')
