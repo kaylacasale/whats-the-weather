@@ -615,7 +615,7 @@ function saveInfo(info) {
 
 
 function renderInfo() {
-    lastInfo = ""
+    // lastInfo = ""
     var lastInfo = JSON.parse(localStorage.getItem("search"))
     console.log(lastInfo)
 
@@ -626,42 +626,20 @@ function renderInfo() {
 
 
 
-
-    // var searchDiv = document.getElementById('searchGroup')
-
-    // var ulEl = document.createElement('ul')
-    // ulEl.setAttribute('class', 'list-group list-group-flush')
-    // searchDiv.append(ulEl)
-
-
-    // for (var i = 0; i < 10; i++) {
-    //     var liEl = document.createElement('li')
-    //     liEl.setAttribute('class', 'list-group-item')
-    //     liEl.textContent = lastInfo[i]
-    //     ulEl.append(liEl)
-    // }
-
 }
 
-// function passCoord(searchCoord) {
-//     console.log(searchCoord)
-//     //init(searchCoord)
-//     //init(searchCoord)
 
-// }
 var displayArr = []
 console.log(displayArr)
 
 function displayInfo(lastInfo) {
-    // console.log(lastInfo)
-    // console.log(lastInfo[0].city)
+
 
 
 
 
     for (var i = 0; i < lastInfo.length; i++) {
-        console.log(lastInfo[i])
-        // liEl.innerHTML = lastInfo[i]
+
         var infoArr = lastInfo[i]
         var searchHistory = {
             "city": infoArr.city,
@@ -673,9 +651,7 @@ function displayInfo(lastInfo) {
             "coord": infoArr.coord,
             'state': infoArr.state
         }
-        //saveStateCoord(searchCoord)
 
-        // generateSearch(lastInfo[0])
 
         console.log(searchHistory)
         var searchDiv = document.getElementById('searchGroup')
@@ -683,24 +659,15 @@ function displayInfo(lastInfo) {
         console.log(searchListText)
 
 
-        // var ulEl = document.createElement('ul')
-        // ulEl.setAttribute('class', 'list-group list-group-flush')
-        // searchDiv.append(ulEl)
-        // var liEl = document.createElement('li')
-        // liEl.setAttribute('class', 'list-group-item')
-        // liEl.textContent = searchListText
-        // ulEl.append(liEl)
+
 
         var ulEl = document.createElement('ul')
         ulEl.setAttribute('class', 'list-group list-group-flush')
         searchDiv.append(ulEl)
-        //var liEl = document.createElement('li')
         var buttonEl = document.createElement('button')
         buttonEl.setAttribute('type', 'button')
-        // liEl.setAttribute('class', 'list-group-item')
         buttonEl.setAttribute('class', 'list-group-item list-group-item-action')
         buttonEl.setAttribute('data-index', i)
-        // liEl.textContent = searchListText
         buttonEl.textContent = searchListText
 
         //ulEl.append(liEl)
@@ -732,74 +699,76 @@ function displayInfo(lastInfo) {
             generateSearch(ind)
         })
     }
-    // var listBtns = document.querySelectorAll('.list-group-item')
-    // console.log(listBtns)
-
-
-    //console.log(ind)
-    // let some = indexOf(selectList)
     console.log(selectList)
-    // listBtns.forEach(function (btn) {
-
-    //     btn.addEventListener('click', function () {
-    //         var listed = JSON.parse(localStorage.getItem("search"))
-    //         for (var i = 0; i < listed.length; i++) {
-
-
-
-    //             var txt = selectList
-    //             console.log(txt)
-    //             console.log(listed)
-    //             let listing = listed[i]
-    //             console.log(listing)
-    //             let listCity = listed[i].city
-    //             console.log(listCity)
-    //             // let ind = btn.dataset.index
-    //             // console.log(ind)
-    //             // let some = listCity.indexOf()
-    //             latlon(listCity)
-
-    //             var selectList = document.querySelector(`[data-index="${i}"`)
-    //             // console.log(selectedList.data(index))
-    //             console.log(selectList)
-    //             //  document.querySelector(listBtns[i])
-
-    //         }
-    //     })
-
-    // })
-    // listBtn.addEventListener('click', function () {
-    //     var listed = JSON.parse(localStorage.getItem("search"))
-    //     for (var i = 0; i < listed.length; i++) {
-    //         console.log(listed)
-
-
-
-    //     }
-    // })
-    // function generateSearch() {
-    //     console.log(lastInfo)
-    //     if (city) {
-    //         var city = lastInfo[0]
-    //         latlon(city)
-
-    //     }
-
-
-
-    // }
-
-
-    // for (var i = 0; i < 10; i++) {
-
-
-    //     var liEl = document.createElement('li')
-    //     liEl.setAttribute('class', 'list-group-item')
-    //     liEl.textContent = lastInfo[i][0]
-    //     ulEl.append(liEl)
-    // }
-
 }
+// var listBtns = document.querySelectorAll('.list-group-item')
+// console.log(listBtns)
+
+
+//console.log(ind)
+// let some = indexOf(selectList)
+
+// listBtns.forEach(function (btn) {
+
+//     btn.addEventListener('click', function () {
+//         var listed = JSON.parse(localStorage.getItem("search"))
+//         for (var i = 0; i < listed.length; i++) {
+
+
+
+//             var txt = selectList
+//             console.log(txt)
+//             console.log(listed)
+//             let listing = listed[i]
+//             console.log(listing)
+//             let listCity = listed[i].city
+//             console.log(listCity)
+//             // let ind = btn.dataset.index
+//             // console.log(ind)
+//             // let some = listCity.indexOf()
+//             latlon(listCity)
+
+//             var selectList = document.querySelector(`[data-index="${i}"`)
+//             // console.log(selectedList.data(index))
+//             console.log(selectList)
+//             //  document.querySelector(listBtns[i])
+
+//         }
+//     })
+
+// })
+// listBtn.addEventListener('click', function () {
+//     var listed = JSON.parse(localStorage.getItem("search"))
+//     for (var i = 0; i < listed.length; i++) {
+//         console.log(listed)
+
+
+
+//     }
+// })
+// function generateSearch() {
+//     console.log(lastInfo)
+//     if (city) {
+//         var city = lastInfo[0]
+//         latlon(city)
+
+//     }
+
+
+
+// }
+
+
+// for (var i = 0; i < 10; i++) {
+
+
+//     var liEl = document.createElement('li')
+//     liEl.setAttribute('class', 'list-group-item')
+//     liEl.textContent = lastInfo[i][0]
+//     ulEl.append(liEl)
+// }
+
+
 
 // var listBtns = document.querySelectorAll('.list-group-item')
 
