@@ -43,7 +43,8 @@ WHEN I click on a city in the search history
 
 THEN I am again presented with current and future conditions for that city
 
+## Mockup
+The following displays the appearance and functionality of the Weather Dashboard application.
 
-
-
+https://user-images.githubusercontent.com/115776118/209044370-aa7abb49-ab14-4a8f-af50-c080d3b4b5c6.mov
 
